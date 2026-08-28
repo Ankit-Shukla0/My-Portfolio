@@ -1495,6 +1495,24 @@
     }
 
     @media (max-width: 640px) {
+      .site-header {
+        padding: 1rem 1rem;
+      }
+      .nav-logo {
+        font-size: 1.1rem;
+      }
+      .nav-cta-btn {
+        padding: 0.35rem 0.45rem 0.35rem 0.95rem;
+        font-size: 0.82rem;
+      }
+      .nav-cta-arrow-circle {
+        width: 28px;
+        height: 28px;
+        font-size: 0.95rem;
+      }
+      .hero-section {
+        padding: 4.8rem 0.8rem 2rem;
+      }
       .showcase-devices-track {
         grid-template-columns: 1fr;
       }
@@ -1503,6 +1521,18 @@
       }
       .about-stats {
         grid-template-columns: 1fr;
+      }
+      .contact-submit-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .contact-call-btn {
+        padding: 0.85rem 1rem;
+      }
+      .footer-bar {
+        flex-direction: column;
+        gap: 1.2rem;
+        text-align: center;
       }
     }
   </style>
@@ -2383,7 +2413,7 @@
         drawCurrentFrame(Math.round(currentFrame), true);
       }
 
-      // Draw frame with object-fit: cover logic and centered alignment
+      // Draw frame with object-fit: cover logic and head/face preservation
       function drawCurrentFrame(frameIdx, force = false) {
         if (!force && frameIdx === lastDrawnFrame) return;
 
@@ -2401,10 +2431,12 @@
           drawW = w;
           drawH = w / imgAspect;
           drawX = 0;
-          drawY = (h - drawH) / 2;
+          // Anchor near the top so head & face are never cropped on widescreen/desktop
+          drawY = Math.max(h - drawH, (h - drawH) * 0.05);
         } else {
           drawH = h;
           drawW = h * imgAspect;
+          // Center horizontally on mobile/portrait so subject is centered
           drawX = (w - drawW) / 2;
           drawY = 0;
         }
@@ -2589,52 +2621,59 @@
       }
     }
 
-    // ── Seamless Scroll Audio Playback Engine (Plays Automatically on Scroll) ──
+    // ── Motion & Hover Reactive Audio (Plays on mouse move/scroll, stops when idle) ──
     (function () {
       const audio = document.getElementById('bg-audio');
       if (!audio) return;
 
-      let hasPlayed = false;
+      let stopTimer = null;
+      let fadeInterval = null;
+      audio.volume = 0;
 
-      function playAudioSmoothly() {
-        if (hasPlayed) return;
-        hasPlayed = true;
-
-        // Cleanup gesture listeners
-        ['wheel', 'scroll', 'touchmove', 'pointerdown', 'keydown', 'touchstart'].forEach(evt => {
-          window.removeEventListener(evt, playAudioSmoothly, { passive: true });
-        });
-
-        audio.volume = 0.05;
-        const playPromise = audio.play();
-
-        if (playPromise !== undefined) {
-          playPromise.then(() => {
-            // Smooth cinematic volume ramp up
-            let vol = 0.05;
-            const fadeInterval = setInterval(() => {
-              vol = Math.min(0.75, vol + 0.08);
-              audio.volume = vol;
-              if (vol >= 0.75) clearInterval(fadeInterval);
-            }, 50);
-          }).catch(err => {
-            console.log('Autoplay policy waiting for direct gesture:', err);
-            hasPlayed = false; // allow retry on next scroll tick
-          });
+      function fadeIn() {
+        clearInterval(fadeInterval);
+        if (audio.paused) {
+          audio.play().catch(() => {});
         }
+        fadeInterval = setInterval(() => {
+          if (audio.volume < 0.70) {
+            audio.volume = Math.min(0.70, audio.volume + 0.12);
+          } else {
+            clearInterval(fadeInterval);
+          }
+        }, 30);
       }
 
-      // Listen for any scroll, wheel, trackpad movement, touch drag, or key scroll
-      ['wheel', 'scroll', 'touchmove', 'pointerdown', 'keydown', 'touchstart'].forEach(evt => {
-        window.addEventListener(evt, playAudioSmoothly, { passive: true });
-      });
+      function fadeOutAndPause() {
+        clearInterval(fadeInterval);
+        fadeInterval = setInterval(() => {
+          if (audio.volume > 0.08) {
+            audio.volume = Math.max(0, audio.volume - 0.12);
+          } else {
+            audio.volume = 0;
+            audio.pause();
+            clearInterval(fadeInterval);
+          }
+        }, 30);
+      }
 
-      // Hook directly into scroll position
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 2 && !hasPlayed) {
-          playAudioSmoothly();
+      function onUserMotion() {
+        if (stopTimer) clearTimeout(stopTimer);
+
+        if (audio.paused || audio.volume < 0.6) {
+          fadeIn();
         }
-      }, { passive: true });
+
+        // Stop/pause smoothly when mouse stops moving or scrolling stops for 450ms
+        stopTimer = setTimeout(() => {
+          fadeOutAndPause();
+        }, 450);
+      }
+
+      // Track hovering, mouse movement, wheel scrubbing, page scrolling, and touch dragging
+      ['mousemove', 'pointermove', 'wheel', 'scroll', 'touchmove'].forEach(evt => {
+        window.addEventListener(evt, onUserMotion, { passive: true });
+      });
     })();
   </script>
 
