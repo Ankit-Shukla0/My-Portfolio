@@ -1541,9 +1541,6 @@
 
   <!-- Background Smooth Scroll Frame Canvas (300 Frames) -->
   <canvas id="frame-canvas"></canvas>
-
-  <!-- Background Audio — plays once on first user interaction -->
-  <audio id="bg-audio" preload="auto" src="Man_walking_and_sitting_on_202608282128.mp3"></audio>
   
   <!-- Content Layer matching Reference Sections -->
   <div class="content-wrapper">
@@ -2428,17 +2425,26 @@
         let drawW, drawH, drawX, drawY;
 
         if (screenAspect > imgAspect) {
+          // Extra wide screen (desktop)
           drawW = w;
           drawH = w / imgAspect;
           drawX = 0;
-          // Anchor near the top so head & face are never cropped on widescreen/desktop
-          drawY = Math.max(h - drawH, (h - drawH) * 0.05);
+          drawY = 0; // Anchor top so face is always visible
         } else {
-          drawH = h;
-          drawW = h * imgAspect;
-          // Center horizontally on mobile/portrait so subject is centered
-          drawX = (w - drawW) / 2;
-          drawY = 0;
+          // Portrait & Mobile screens:
+          // Keep subject comfortably framed and centered with head completely visible
+          if (screenAspect < 0.8) {
+            // Mobile screens: Scale width appropriately to show head, face and gestures
+            drawW = Math.max(w * 1.5, h * 0.88);
+            drawH = drawW / imgAspect;
+            drawX = (w - drawW) / 2;
+            drawY = Math.max(0, (h - drawH) * 0.12);
+          } else {
+            drawH = h;
+            drawW = h * imgAspect;
+            drawX = (w - drawW) / 2;
+            drawY = 0;
+          }
         }
 
         ctx.fillStyle = '#070203';
@@ -2621,58 +2627,96 @@
       }
     }
 
-    // ── Motion & Hover Reactive Audio (Plays on mouse move/scroll, stops when idle) ──
+    // ── Interactive Web Audio Sound Engine (Syncs with scroll animation & UI) ──
     (function () {
-      const audio = document.getElementById('bg-audio');
-      if (!audio) return;
+      let audioCtx = null;
+      let lastScrollPos = window.scrollY;
+      let lastSoundTime = 0;
 
-      let stopTimer = null;
-      let fadeInterval = null;
-      audio.volume = 0;
-
-      function fadeIn() {
-        clearInterval(fadeInterval);
-        if (audio.paused) {
-          audio.play().catch(() => {});
-        }
-        fadeInterval = setInterval(() => {
-          if (audio.volume < 0.70) {
-            audio.volume = Math.min(0.70, audio.volume + 0.12);
-          } else {
-            clearInterval(fadeInterval);
+      function getAudioContext() {
+        if (!audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) {
+            audioCtx = new AudioContext();
           }
-        }, 30);
-      }
-
-      function fadeOutAndPause() {
-        clearInterval(fadeInterval);
-        fadeInterval = setInterval(() => {
-          if (audio.volume > 0.08) {
-            audio.volume = Math.max(0, audio.volume - 0.12);
-          } else {
-            audio.volume = 0;
-            audio.pause();
-            clearInterval(fadeInterval);
-          }
-        }, 30);
-      }
-
-      function onUserMotion() {
-        if (stopTimer) clearTimeout(stopTimer);
-
-        if (audio.paused || audio.volume < 0.6) {
-          fadeIn();
         }
-
-        // Stop/pause smoothly when mouse stops moving or scrolling stops for 450ms
-        stopTimer = setTimeout(() => {
-          fadeOutAndPause();
-        }, 450);
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        return audioCtx;
       }
 
-      // Track hovering, mouse movement, wheel scrubbing, page scrolling, and touch dragging
-      ['mousemove', 'pointermove', 'wheel', 'scroll', 'touchmove'].forEach(evt => {
-        window.addEventListener(evt, onUserMotion, { passive: true });
+      // Play soft, warm organic acoustic resonance when scrubbing video frames
+      function playScrubSound(intensity = 1.0) {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+
+        const now = ctx.currentTime;
+        if (now - lastSoundTime < 0.08) return;
+        lastSoundTime = now;
+
+        try {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          const filter = ctx.createBiquadFilter();
+
+          filter.type = 'lowpass';
+          filter.frequency.setValueAtTime(1400, now);
+
+          const maxScroll = document.documentElement.scrollHeight - window.innerHeight || 1;
+          const progress = Math.min(Math.max(window.scrollY / maxScroll, 0), 1);
+          const baseFreq = 200 + progress * 220; // 200Hz to 420Hz harmonic range
+
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(baseFreq, now);
+          osc.frequency.exponentialRampToValueAtTime(baseFreq * 0.7, now + 0.14);
+
+          gain.gain.setValueAtTime(0.001, now);
+          gain.gain.linearRampToValueAtTime(0.045 * Math.min(intensity, 1.5), now + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.15);
+
+          osc.connect(filter);
+          filter.connect(gain);
+          gain.connect(ctx.destination);
+
+          osc.start(now);
+          osc.stop(now + 0.16);
+        } catch (e) {}
+      }
+
+      // Track scroll scrubbing across desktop and mobile
+      window.addEventListener('scroll', () => {
+        const currentScroll = window.scrollY;
+        const speed = Math.abs(currentScroll - lastScrollPos);
+        lastScrollPos = currentScroll;
+
+        if (speed > 2) {
+          playScrubSound(Math.min(speed / 20, 1.2));
+        }
+      }, { passive: true });
+
+      // Interactive UI click sound on buttons and links
+      document.addEventListener('click', (e) => {
+        if (e.target.closest('a, button, .tool-avatar-bubble, .device-action-btn, .collab-contact-pill')) {
+          const ctx = getAudioContext();
+          if (!ctx) return;
+          const now = ctx.currentTime;
+          try {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(520, now);
+            osc.frequency.exponentialRampToValueAtTime(880, now + 0.08);
+
+            gain.gain.setValueAtTime(0.035, now);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.09);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.1);
+          } catch (e) {}
+        }
       });
     })();
   </script>
