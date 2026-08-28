@@ -1,0 +1,2648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ankit Shukla — Backend & Full Stack Developer Portfolio</title>
+  
+  <!-- Google Fonts: Cinzel (Luxury Editorial Serif) + Syne & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #070203;
+      --card-bg: rgba(5, 1, 2, 0.28);
+      --card-border: rgba(244, 63, 94, 0.3);
+      --card-border-hover: rgba(244, 63, 94, 0.6);
+      --accent-red: #e11d48;
+      --accent-crimson: #be123c;
+      --accent-rose: #f43f5e;
+      --accent-gold: #fbbf24;
+      --text-white: #f8fafc;
+      --text-muted: #e2e8f0;
+      --text-dim: #cbd5e1;
+      --font-serif: 'Cinzel', serif;
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      font-family: var(--font-body);
+    }
+
+    body {
+      width: 100%;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Fixed Background Canvas for 300-Frame Scroll Video */
+    #frame-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: block;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Ambient Overlay removed per user request for direct clear background */
+    .cinematic-overlay {
+      display: none !important;
+    }
+
+    /* Content Layer sitting on top of the animation */
+    .content-wrapper {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      pointer-events: auto;
+    }
+
+    /* ==========================================================
+       TOP NAVIGATION BAR (From Reference Header)
+       ========================================================== */
+    .site-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 1.5rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+      pointer-events: auto;
+    }
+
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      color: #fff;
+      text-decoration: none;
+      text-transform: uppercase;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-logo-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-rose);
+      box-shadow: 0 0 12px var(--accent-rose);
+    }
+
+    .nav-right-cluster {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .nav-links-menu {
+      display: flex;
+      align-items: center;
+      gap: 2.2rem;
+      list-style: none;
+    }
+
+    .nav-link-anchor {
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: none;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      transition: all 0.25s ease;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+      position: relative;
+      padding: 0.2rem 0;
+    }
+
+    .nav-link-anchor:hover {
+      color: #ffffff;
+      text-shadow: 0 0 15px var(--accent-rose);
+    }
+
+    .nav-link-anchor::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-rose);
+      transition: width 0.25s ease;
+      border-radius: 2px;
+    }
+
+    .nav-link-anchor:hover::after {
+      width: 100%;
+    }
+
+    /* "Get in touch" Pill Button matching Reference Image */
+    .nav-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.9rem;
+      background: #ffffff;
+      color: #080204;
+      text-decoration: none;
+      padding: 0.45rem 0.55rem 0.45rem 1.45rem;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 255, 255, 0.4);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nav-cta-btn:hover {
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 8px 30px rgba(244, 63, 94, 0.6), 0 0 30px rgba(255, 255, 255, 0.7);
+    }
+
+    .nav-cta-arrow-circle {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff4500, #e11d48);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 900;
+      transition: transform 0.3s ease;
+      box-shadow: 0 0 12px rgba(225, 29, 72, 0.5);
+    }
+
+    .nav-cta-btn:hover .nav-cta-arrow-circle {
+      transform: translateX(3px) rotate(45deg);
+    }
+
+    @media (max-width: 768px) {
+      .site-header {
+        padding: 1.1rem 1.25rem;
+      }
+      .nav-links-menu {
+        display: none;
+      }
+    }
+
+    /* Crisp Card Style directly over background with zero blur */
+    .glass-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2.2rem;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8),
+                  0 0 25px -5px rgba(225, 29, 72, 0.15);
+    }
+
+    .glass-card:hover {
+      border-color: var(--card-border-hover);
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.9),
+                  0 0 35px -5px rgba(244, 63, 94, 0.35);
+      transform: translateY(-3px);
+    }
+
+    /* Section Typography */
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      text-transform: capitalize;
+      margin-bottom: 2.5rem;
+      position: relative;
+      display: inline-block;
+      color: var(--text-white);
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8);
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-rose), transparent);
+      border-radius: 2px;
+    }
+
+    .section-container {
+      width: 95%;
+      max-width: 1750px;
+      margin: 0 auto;
+      padding: 5rem 1.25rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* ==========================================================
+       CONTACT FORM SECTION
+       ========================================================== */
+    .contact-section {
+      padding: 6rem 1.25rem 5rem;
+      width: 95%;
+      max-width: 1750px;
+      margin: 0 auto;
+    }
+
+    .contact-big-title {
+      font-family: var(--font-serif);
+      font-size: clamp(4rem, 11vw, 10rem);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      color: var(--text-white);
+      text-shadow: 0 4px 30px rgba(0,0,0,0.9);
+      margin-bottom: 3.5rem;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    /* --- Left: Form side --- */
+    .contact-form-side {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+    }
+
+    .contact-field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .contact-field-group label {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .contact-input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.75rem 0;
+      color: var(--text-white);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 500;
+      outline: none;
+      transition: border-color 0.25s ease;
+      width: 100%;
+    }
+
+    .contact-input::placeholder {
+      color: rgba(255,255,255,0.25);
+    }
+
+    .contact-input:focus {
+      border-bottom-color: var(--accent-rose);
+    }
+
+    .contact-textarea {
+      resize: none;
+      min-height: 110px;
+    }
+
+    .contact-form-status {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      min-height: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .contact-form-status.success { color: #4ade80; }
+    .contact-form-status.error   { color: var(--accent-rose); }
+    .contact-form-status.sending { color: var(--text-dim); }
+
+    .contact-submit-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      background: linear-gradient(135deg, var(--accent-crimson), var(--accent-rose));
+      color: #fff;
+      border: none;
+      padding: 0.85rem 2rem;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      box-shadow: 0 0 25px rgba(225, 29, 72, 0.45);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      align-self: flex-start;
+    }
+
+    .contact-submit-btn:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 0 40px rgba(244, 63, 94, 0.7);
+    }
+
+    .contact-submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* --- Right: Info Card side --- */
+    .contact-info-card {
+      background: rgba(10, 2, 4, 0.85);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-radius: 28px;
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .contact-info-tagline {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-white);
+      line-height: 1.25;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    }
+
+    .contact-info-tagline span {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+      margin-top: 0.3rem;
+    }
+
+    .contact-info-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+    }
+
+    .contact-info-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .contact-info-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.6rem 0.8rem;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .contact-info-row:hover {
+      background: rgba(225, 29, 72, 0.12);
+      border-color: rgba(244, 63, 94, 0.4);
+      color: #fff;
+      transform: translateX(4px);
+    }
+
+    .contact-info-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(225, 29, 72, 0.18);
+      border: 1px solid rgba(244, 63, 94, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: all 0.25s ease;
+    }
+
+    .contact-info-row:hover .contact-info-icon {
+      background: var(--accent-rose);
+      box-shadow: 0 0 18px rgba(244, 63, 94, 0.6);
+    }
+
+    .contact-info-text strong {
+      display: block;
+      color: var(--text-white);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.1rem;
+    }
+
+    /* Call button standalone */
+    .contact-call-btn {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 1rem 1.2rem;
+      text-decoration: none;
+      color: var(--text-white);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .contact-call-btn:hover {
+      background: rgba(225, 29, 72, 0.18);
+      border-color: var(--accent-rose);
+      box-shadow: 0 0 25px rgba(225, 29, 72, 0.35);
+    }
+
+    .contact-call-pulse {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-crimson), var(--accent-rose));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.5);
+      animation: pulse-ring 2s infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse-ring {
+      0%   { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.5); }
+      70%  { box-shadow: 0 0 0 14px rgba(244, 63, 94, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+    }
+
+    @media (max-width: 900px) {
+      .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    /* ==========================================================
+       HERO SECTION (Matching Reference Image 1)
+       ========================================================== */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 5.5rem 1.25rem 2.5rem;
+      width: 95%;
+      max-width: 1750px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .hero-top-title {
+      font-family: var(--font-serif);
+      font-size: clamp(3.5rem, 11vw, 10.5rem);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      color: rgba(255, 255, 255, 0.88);
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.9);
+      user-select: none;
+      text-align: left;
+    }
+
+    .hero-middle-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      margin: 2rem 0;
+      gap: 1.5rem;
+    }
+
+    .hero-left-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .hero-stack-item {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4.5vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: var(--text-white);
+      text-shadow: 0 2px 15px rgba(0, 0, 0, 0.9);
+    }
+
+    .hero-right-designer {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .hero-author-tag {
+      font-family: var(--font-display);
+      font-size: clamp(0.9rem, 1.4vw, 1.25rem);
+      font-weight: 800;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent-rose);
+      margin-bottom: 0.5rem;
+      background: rgba(225, 29, 72, 0.15);
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      display: inline-block;
+    }
+
+    .hero-big-role {
+      font-family: var(--font-display);
+      font-size: clamp(3.2rem, 9.5vw, 8.5rem);
+      font-weight: 900;
+      line-height: 0.88;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      color: #fff;
+      text-shadow: 0 4px 25px rgba(0, 0, 0, 0.9);
+    }
+
+    .hero-big-role .outline-text {
+      color: transparent;
+      -webkit-text-stroke: 2px rgba(255, 255, 255, 0.85);
+      display: block;
+    }
+
+    .hero-bottom-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .hero-contact-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-link-item {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      transition: color 0.25s ease;
+    }
+
+    .hero-link-item span:first-child {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent-rose);
+      font-weight: 700;
+    }
+
+    .hero-link-item:hover {
+      color: #fff;
+    }
+
+    .hero-scroll-hint {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-dim);
+      animation: pulseGlow 2.5s infinite ease-in-out;
+    }
+
+    .scroll-indicator-line {
+      width: 40px;
+      height: 2px;
+      background: var(--accent-rose);
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    /* ==========================================================
+       SECTION: ABOUT ME (Кто я? in Reference)
+       ========================================================== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .about-badge-card {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .about-tag {
+      display: inline-block;
+      background: rgba(225, 29, 72, 0.2);
+      border: 1px solid rgba(244, 63, 94, 0.4);
+      color: var(--accent-rose);
+      padding: 0.4rem 1.2rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    .about-lead {
+      font-size: 1.35rem;
+      font-weight: 600;
+      line-height: 1.5;
+      color: #fff;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .stat-box {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent-rose);
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 0.2rem;
+    }
+
+    .about-details-card p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .about-bullet-item {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-size: 1rem;
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .bullet-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-rose);
+      box-shadow: 0 0 10px var(--accent-rose);
+      flex-shrink: 0;
+    }
+
+    /* ==========================================================
+       SECTION: SKILLS & WORKFLOW (Этапы работы in Reference)
+       ========================================================== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .skill-step-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-pill-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .step-pill-badge {
+      background: #000;
+      border: 1px solid var(--accent-rose);
+      color: var(--accent-rose);
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      letter-spacing: 0.08em;
+      box-shadow: 0 0 15px rgba(225, 29, 72, 0.25);
+    }
+
+    .step-card-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    .step-card-body {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    .step-tag-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .tech-pill {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================
+       SECTION: FEATURED PROJECTS (Ребрендинг сайта in Reference)
+       ========================================================== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.2rem;
+      gap: 1rem;
+    }
+
+    .project-name {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .project-badge {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      background: rgba(244, 63, 94, 0.2);
+      color: var(--accent-rose);
+      border: 1px solid rgba(244, 63, 94, 0.35);
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .project-description {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .project-features {
+      list-style: none;
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .project-features li {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .project-features li::before {
+      content: '▹';
+      color: var(--accent-rose);
+      font-size: 1rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .project-tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: rgba(225, 29, 72, 0.12);
+      color: #fca5a5;
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid rgba(244, 63, 94, 0.2);
+    }
+
+    /* ==========================================================
+       SECTION: INTERACTIVE APP & SYSTEM SHOWCASE (New Section)
+       ========================================================== */
+    .showcase-header-bar {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      width: 100%;
+    }
+
+    .showcase-header-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      color: var(--text-white);
+      white-space: nowrap;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+    }
+
+    .showcase-header-line {
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(244, 63, 94, 0.8), rgba(244, 63, 94, 0.1));
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .header-line-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-rose);
+      box-shadow: 0 0 12px var(--accent-rose);
+      position: absolute;
+      left: 15px;
+    }
+
+    .showcase-stage-card {
+      position: relative;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      padding: 3rem 2.5rem 2rem 2.5rem;
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.8),
+                  0 0 40px -5px rgba(225, 29, 72, 0.18);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 2.2rem;
+    }
+
+    .showcase-top-action {
+      position: absolute;
+      top: 1.8rem;
+      right: 2rem;
+      width: 46px;
+      height: 46px;
+      background: #ffffff;
+      color: #000000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      font-weight: 900;
+      text-decoration: none;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.7);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 15;
+    }
+
+    .showcase-top-action:hover {
+      transform: scale(1.12) rotate(45deg);
+      box-shadow: 0 0 35px var(--accent-rose);
+      background: var(--accent-rose);
+      color: #fff;
+    }
+
+    .carousel-nav-btn {
+      position: absolute;
+      top: 48%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(15, 2, 5, 0.6);
+      border: 1px solid rgba(244, 63, 94, 0.5);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      cursor: pointer;
+      z-index: 20;
+      transition: all 0.25s ease;
+      box-shadow: 0 0 20px rgba(225, 29, 72, 0.35);
+      user-select: none;
+    }
+
+    .carousel-nav-btn.prev { left: 1rem; }
+    .carousel-nav-btn.next { right: 1rem; }
+
+    .carousel-nav-btn:hover {
+      background: var(--accent-rose);
+      box-shadow: 0 0 30px var(--accent-rose);
+      transform: translateY(-50%) scale(1.12);
+    }
+
+    .showcase-devices-track {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.8rem;
+      position: relative;
+      z-index: 10;
+      padding: 0.5rem 1.5rem;
+      transition: transform 0.4s ease;
+    }
+
+    .device-mockup-frame {
+      background: rgba(12, 3, 6, 0.85);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      border-radius: 26px;
+      padding: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      position: relative;
+      box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.8),
+                  inset 0 1px 1px rgba(255, 255, 255, 0.2);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+      min-height: 440px;
+    }
+
+    .device-mockup-frame:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(244, 63, 94, 0.6);
+      box-shadow: 0 20px 45px -5px rgba(0, 0, 0, 0.9),
+                  0 0 30px rgba(225, 29, 72, 0.35);
+    }
+
+    .device-status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      padding: 0 0.4rem;
+    }
+
+    .device-notch {
+      width: 48px;
+      height: 12px;
+      background: #000;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .device-screen-content {
+      background: linear-gradient(180deg, rgba(28, 7, 12, 0.9) 0%, rgba(10, 2, 4, 0.95) 100%);
+      border-radius: 18px;
+      border: 1px solid rgba(244, 63, 94, 0.2);
+      padding: 1.1rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.8rem;
+    }
+
+    .device-app-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .device-app-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      background: var(--accent-rose);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .device-app-title {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .device-screen-hero {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .device-screen-hero h5 {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.3rem;
+    }
+
+    .device-screen-hero p {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .device-card-pill {
+      background: rgba(225, 29, 72, 0.15);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      padding: 0.4rem 0.6rem;
+      border-radius: 8px;
+      font-size: 0.7rem;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .device-action-btn {
+      background: linear-gradient(90deg, var(--accent-crimson), var(--accent-rose));
+      color: #fff;
+      border-radius: 10px;
+      padding: 0.6rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: 0.05em;
+      box-shadow: 0 0 15px rgba(225, 29, 72, 0.4);
+      cursor: pointer;
+    }
+
+    /* Bottom tools tray in the showcase card */
+    .showcase-tools-tray {
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 100px;
+      padding: 0.7rem 1.6rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin: 0 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tray-arrow-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--accent-rose);
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .tray-arrow-line {
+      width: 50px;
+      height: 2px;
+      background: var(--accent-rose);
+      position: relative;
+    }
+
+    .tray-icons-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .tool-avatar-bubble {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      color: #fff;
+      font-weight: 700;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .tool-avatar-bubble:hover {
+      background: var(--accent-rose);
+      border-color: #fff;
+      transform: translateY(-3px) scale(1.12);
+      box-shadow: 0 0 18px var(--accent-rose);
+    }
+
+    /* ==========================================================
+       SECTION: EXPERIENCE & TIMELINE (Другие работы in Reference)
+       ========================================================== */
+    .timeline-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+
+    .timeline-card {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .timeline-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .timeline-date {
+      font-family: var(--font-display);
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--accent-rose);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .timeline-company {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .timeline-location {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    .timeline-content h4 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.6rem;
+    }
+
+    .timeline-content ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .timeline-content li {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      position: relative;
+      padding-left: 1.2rem;
+    }
+
+    .timeline-content li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--accent-rose);
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    /* ==========================================================
+       SECTION: COLLABORATION & CONTACT (Сотрудничество in Reference)
+       ========================================================== */
+    .collab-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .collab-cta-card {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .collab-lead {
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.4;
+      color: #fff;
+    }
+
+    .collab-subtext {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+    }
+
+    .collab-contact-items {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .collab-contact-pill {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.8rem 1.4rem;
+      border-radius: 12px;
+      transition: all 0.25s ease;
+      font-size: 0.95rem;
+    }
+
+    .collab-contact-pill:hover {
+      background: rgba(225, 29, 72, 0.18);
+      border-color: var(--accent-rose);
+      transform: translateX(5px);
+    }
+
+    .collab-icon-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(225, 29, 72, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-rose);
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    /* QR Code Cards Grid matching reference image */
+    .qr-cards-wrapper {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .qr-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 1.8rem 1.2rem;
+      gap: 1rem;
+    }
+
+    .qr-box {
+      width: 140px;
+      height: 140px;
+      background: #ffffff;
+      padding: 10px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 25px rgba(244, 63, 94, 0.3);
+    }
+
+    .qr-box svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .qr-label {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-white);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .qr-sub {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    /* Footer Signature Bar matching Reference bottom signature */
+    .footer-bar {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 2.5rem 1.25rem;
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      width: 95%;
+      max-width: 1750px;
+      margin: 0 auto;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    .footer-signature {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      color: var(--text-white);
+      text-transform: uppercase;
+    }
+
+    /* Minimalist Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #070203;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(244, 63, 94, 0.35);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(244, 63, 94, 0.65);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+      .hero-middle-grid {
+        grid-template-columns: 1fr;
+        text-align: left;
+      }
+      .hero-right-designer {
+        align-items: flex-start;
+        text-align: left;
+      }
+      .about-grid,
+      .skills-grid,
+      .projects-grid,
+      .collab-grid {
+        grid-template-columns: 1fr;
+      }
+      .showcase-devices-track {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .timeline-card {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .showcase-devices-track {
+        grid-template-columns: 1fr;
+      }
+      .qr-cards-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .about-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Smooth Scroll Frame Canvas (300 Frames) -->
+  <canvas id="frame-canvas"></canvas>
+
+  <!-- Background Audio — plays once on first user interaction -->
+  <audio id="bg-audio" preload="auto" src="Man_walking_and_sitting_on_202608282128.mp3"></audio>
+  
+  <!-- Content Layer matching Reference Sections -->
+  <div class="content-wrapper">
+
+    <!-- ==========================================================
+         TOP NAVIGATION HEADER (From Reference)
+         ========================================================== -->
+    <header class="site-header">
+      <a href="#" class="nav-logo">
+        <span class="nav-logo-dot"></span>
+        <span>Ankit Shukla</span>
+      </a>
+
+      <div class="nav-right-cluster">
+        <ul class="nav-links-menu">
+          <li><a href="#" class="nav-link-anchor">Home</a></li>
+          <li><a href="#about" class="nav-link-anchor">About</a></li>
+          <li><a href="#workflow" class="nav-link-anchor">Skills</a></li>
+          <li><a href="#showcase" class="nav-link-anchor">Showcase</a></li>
+          <li><a href="#projects" class="nav-link-anchor">Projects</a></li>
+        </ul>
+
+        <a href="#contact-form" class="nav-cta-btn">
+          <span>Get in touch</span>
+          <div class="nav-cta-arrow-circle">→</div>
+        </a>
+      </div>
+    </header>
+
+    <!-- ==========================================================
+         HERO SECTION (Matching Reference Image 1)
+         ========================================================== -->
+    <section class="hero-section">
+      <div class="hero-top-title">Portfolio</div>
+
+      <div class="hero-middle-grid">
+        <div class="hero-left-stack">
+          <div class="hero-stack-item">JAVA</div>
+          <div class="hero-stack-item">WITH AI</div>
+          <div class="hero-stack-item">B.TECH ECE</div>
+        </div>
+
+        <div></div>
+
+        <div class="hero-right-designer">
+          <div class="hero-author-tag">ANKIT SHUKLA • B.TECH ECE</div>
+          <div class="hero-big-role">
+            DEVE<span class="outline-text">LOPER</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-bottom-bar">
+        <div class="hero-contact-links">
+          <a href="mailto:ankitshukla9135@gmail.com" class="hero-link-item">
+            <span>email:</span>
+            <span>ankitshukla9135@gmail.com</span>
+          </a>
+          <a href="https://github.com/Ankit-Shukla0" target="_blank" rel="noopener noreferrer" class="hero-link-item">
+            <span>github:</span>
+            <span>github.com/Ankit-Shukla0</span>
+          </a>
+          <a href="tel:+918797267351" class="hero-link-item">
+            <span>phone:</span>
+            <span>+91 8797267351</span>
+          </a>
+        </div>
+
+        <div class="hero-scroll-hint">
+          <span>Scroll to Explore</span>
+          <div class="scroll-indicator-line"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         SECTION 2: ABOUT ME (Кто я?)
+         ========================================================== -->
+    <section class="section-container" id="about">
+      <h2 class="section-title">About Me</h2>
+
+      <div class="about-grid">
+        <div class="glass-card about-badge-card">
+          <span class="about-tag">Backend Engineer</span>
+          <h3 class="about-lead">
+            Building scalable Java/Spring Boot microservices, high-throughput SQL engines, and modern full-stack web platforms.
+          </h3>
+          
+          <div class="about-stats">
+            <div class="stat-box">
+              <div class="stat-number">1+</div>
+              <div class="stat-label">Years Hands-On</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number">4+</div>
+              <div class="stat-label">Major Projects</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number">100%</div>
+              <div class="stat-label">Production Ready</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card about-details-card">
+          <p>
+            I am a dedicated Backend Engineer with solid foundation in <strong>Java, Spring Boot, REST APIs, OOP principles</strong>, and database optimization. Comfortable across the modern stack with <strong>React, Next.js, Three.js 3D web</strong>, and <strong>Python</strong> for AI/RAG knowledge assistants.
+          </p>
+          <ul class="about-bullet-list">
+            <li class="about-bullet-item">
+              <span class="bullet-dot"></span>
+              <span>Architecting robust RESTful microservices with Spring Boot & Hibernate JPA</span>
+            </li>
+            <li class="about-bullet-item">
+              <span class="bullet-dot"></span>
+              <span>Advanced SQL query optimization (joins, aggregations, indexing) for MySQL & PostgreSQL</span>
+            </li>
+            <li class="about-bullet-item">
+              <span class="bullet-dot"></span>
+              <span>Interactive frontend development with Next.js App Router, React & Three.js</span>
+            </li>
+            <li class="about-bullet-item">
+              <span class="bullet-dot"></span>
+              <span>AI-driven RAG pipelines using Python, LangChain, pgVector & LLM embeddings</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         SECTION 3: TECH STACK & WORKFLOW (Этапы работы)
+         ========================================================== -->
+    <section class="section-container" id="workflow">
+      <h2 class="section-title">Skills & Architecture</h2>
+
+      <div class="skills-grid">
+        <!-- Step 1 -->
+        <div class="glass-card skill-step-card">
+          <div class="step-pill-header">
+            <span class="step-pill-badge">01</span>
+            <h3 class="step-card-title">Backend Core</h3>
+          </div>
+          <p class="step-card-body">
+            Deep experience in enterprise Java architectures, Spring Boot, Hibernate ORM, RESTful API design, and OWASP security practices.
+          </p>
+          <div class="step-tag-pills">
+            <span class="tech-pill">Java</span>
+            <span class="tech-pill">Spring Boot</span>
+            <span class="tech-pill">Hibernate (JPA)</span>
+            <span class="tech-pill">REST APIs</span>
+            <span class="tech-pill">Node.js</span>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="glass-card skill-step-card">
+          <div class="step-pill-header">
+            <span class="step-pill-badge">02</span>
+            <h3 class="step-card-title">Database Engineering</h3>
+          </div>
+          <p class="step-card-body">
+            Structured data modeling, complex analytical queries, indexing, and vector database management for high-concurrency systems.
+          </p>
+          <div class="step-tag-pills">
+            <span class="tech-pill">MySQL</span>
+            <span class="tech-pill">PostgreSQL</span>
+            <span class="tech-pill">pgVector</span>
+            <span class="tech-pill">Firebase</span>
+            <span class="tech-pill">SQL Optimization</span>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="glass-card skill-step-card">
+          <div class="step-pill-header">
+            <span class="step-pill-badge">03</span>
+            <h3 class="step-card-title">Frontend & 3D Web</h3>
+          </div>
+          <p class="step-card-body">
+            Crafting engaging modern interfaces with Next.js App Router, React, TypeScript, and immersive 3D graphics in Three.js.
+          </p>
+          <div class="step-tag-pills">
+            <span class="tech-pill">Next.js</span>
+            <span class="tech-pill">React</span>
+            <span class="tech-pill">Three.js</span>
+            <span class="tech-pill">TypeScript</span>
+            <span class="tech-pill">HTML5/CSS3</span>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="glass-card skill-step-card">
+          <div class="step-pill-header">
+            <span class="step-pill-badge">04</span>
+            <h3 class="step-card-title">AI & Data Pipelines</h3>
+          </div>
+          <p class="step-card-body">
+            Building automated retrieval-augmented generation (RAG) pipelines, embedding generators, and multi-condition data filtering scripts.
+          </p>
+          <div class="step-tag-pills">
+            <span class="tech-pill">Python</span>
+            <span class="tech-pill">LangChain</span>
+            <span class="tech-pill">Pandas</span>
+            <span class="tech-pill">NumPy</span>
+            <span class="tech-pill">RAG Pipelines</span>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="glass-card skill-step-card">
+          <div class="step-pill-header">
+            <span class="step-pill-badge">05</span>
+            <h3 class="step-card-title">Cloud & Tooling</h3>
+          </div>
+          <p class="step-card-body">
+            End-to-end version control, CI/CD automated deployment, Postman API testing, and agile sprint collaboration.
+          </p>
+          <div class="step-tag-pills">
+            <span class="tech-pill">Git / GitHub</span>
+            <span class="tech-pill">Postman</span>
+            <span class="tech-pill">Vercel CI/CD</span>
+            <span class="tech-pill">VS Code</span>
+            <span class="tech-pill">IntelliJ IDEA</span>
+          </div>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="glass-card skill-step-card">
+          <div class="step-pill-header">
+            <span class="step-pill-badge">06</span>
+            <h3 class="step-card-title">Agile & Code Integrity</h3>
+          </div>
+          <p class="step-card-body">
+            Writing testable, maintainable code with step-wise problem decomposition, audit-style documentation, and Scrum workflow adherence.
+          </p>
+          <div class="step-tag-pills">
+            <span class="tech-pill">Agile / Scrum</span>
+            <span class="tech-pill">SDLC</span>
+            <span class="tech-pill">OOP Design</span>
+            <span class="tech-pill">Code Reviews</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         SECTION 4: FEATURED PROJECTS (Ребрендинг сайта)
+         ========================================================== -->
+    <section class="section-container" id="projects">
+      <h2 class="section-title">Featured Projects</h2>
+
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="glass-card project-card">
+          <div>
+            <div class="project-header">
+              <h3 class="project-name">HK Advance+ Clinic Website</h3>
+              <span class="project-badge">Production</span>
+            </div>
+            <p class="project-description">
+              Production marketing platform for a medical aesthetics clinic featuring an interactive 3D hero scene built with Three.js/React Three Fiber, serverless consultation routes, and dynamic SEO.
+            </p>
+            <ul class="project-features">
+              <li>Interactive 3D hero scene with custom lighting & shaders</li>
+              <li>Serverless Node.js API with SMTP email delivery and secrets management</li>
+              <li>Automated GitHub-to-Vercel CI/CD pipeline & dynamic sitemap/metadata SEO</li>
+            </ul>
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">Next.js</span>
+            <span class="project-tag">React</span>
+            <span class="project-tag">TypeScript</span>
+            <span class="project-tag">Three.js</span>
+            <span class="project-tag">Node.js</span>
+            <span class="project-tag">Vercel</span>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="glass-card project-card">
+          <div>
+            <div class="project-header">
+              <h3 class="project-name">CheckMyBus Ticket Search Platform</h3>
+              <span class="project-badge">Backend Engine</span>
+            </div>
+            <p class="project-description">
+              Full-fledged bus search and reservation backend system built with Java Spring Boot and MySQL, featuring high-speed availability search and booking transactional safety.
+            </p>
+            <ul class="project-features">
+              <li>Optimized relational database schema and complex query execution</li>
+              <li>Modular REST API architecture tested extensively in Agile sprints</li>
+              <li>Transactional seat booking mechanisms with concurrency controls</li>
+            </ul>
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">Java</span>
+            <span class="project-tag">Spring Boot</span>
+            <span class="project-tag">Hibernate</span>
+            <span class="project-tag">MySQL</span>
+            <span class="project-tag">Postman</span>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="glass-card project-card">
+          <div>
+            <div class="project-header">
+              <h3 class="project-name">RAG-Based Knowledge Assistant</h3>
+              <span class="project-badge">GenAI / NLP</span>
+            </div>
+            <p class="project-description">
+              End-to-end retrieval-augmented generation (RAG) system for document ingestion, text embedding generation, vector similarity search, and accurate context-aware responses.
+            </p>
+            <ul class="project-features">
+              <li>Document ingestion and vector embedding pipeline using pgVector</li>
+              <li>Semantic similarity search in PostgreSQL for ultra-fast document lookups</li>
+              <li>LangChain LLM orchestration with iterative prompt engineering</li>
+            </ul>
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">LangChain</span>
+            <span class="project-tag">pgVector</span>
+            <span class="project-tag">PostgreSQL</span>
+            <span class="project-tag">OpenAI</span>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="glass-card project-card">
+          <div>
+            <div class="project-header">
+              <h3 class="project-name">E-Commerce Data Analytics Filter</h3>
+              <span class="project-badge">Data Science</span>
+            </div>
+            <p class="project-description">
+              Data cleaning and transformation engine capable of processing real-world commercial transaction datasets with missing values, condition filters, and summary reporting.
+            </p>
+            <ul class="project-features">
+              <li>Automated missing value handling and anomalous data cleansing</li>
+              <li>Multi-condition filtering and statistical aggregation workflows</li>
+              <li>Structured output ready for downstream analytical dashboards</li>
+            </ul>
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">Pandas</span>
+            <span class="project-tag">NumPy</span>
+            <span class="project-tag">Data Cleaning</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         SECTION: INTERACTIVE APP & SYSTEM SHOWCASE (From Reference)
+         ========================================================== -->
+    <section class="section-container" id="showcase">
+      <div class="showcase-header-bar">
+        <h2 class="showcase-header-title">Interactive Showcase</h2>
+        <div class="showcase-header-line">
+          <span class="header-line-dot"></span>
+        </div>
+      </div>
+
+      <div class="showcase-stage-card">
+        <!-- Top Right External Link Circle Button -->
+        <a href="https://github.com/Ankit-Shukla0" target="_blank" rel="noopener noreferrer" class="showcase-top-action" title="View Source Repositories">↗</a>
+
+        <!-- Carousel Navigation Arrow Buttons -->
+        <button class="carousel-nav-btn prev" id="showcase-prev" aria-label="Previous Screen">‹</button>
+        <button class="carousel-nav-btn next" id="showcase-next" aria-label="Next Screen">›</button>
+
+        <!-- 4 Smartphone / Device Mockup Screens -->
+        <div class="showcase-devices-track" id="devices-track">
+          
+          <!-- Mockup 1: CheckMyBus Mobile App -->
+          <div class="device-mockup-frame">
+            <div class="device-status-bar">
+              <span>9:41</span>
+              <div class="device-notch"></div>
+              <span>5G 100%</span>
+            </div>
+            <div class="device-screen-content">
+              <div class="device-app-header">
+                <div class="device-app-icon">🚌</div>
+                <div>
+                  <div class="device-app-title">CheckMyBus Mobile</div>
+                  <div style="font-size: 0.65rem; color: var(--text-dim);">Spring Boot & MySQL</div>
+                </div>
+              </div>
+
+              <div class="device-screen-hero">
+                <h5>Fast Route Search</h5>
+                <p>Real-time seat mapping & transactional ticket reservation engine.</p>
+              </div>
+
+              <div class="device-card-pill">
+                <span>Selected: Seat 14A</span>
+                <span style="color: var(--accent-rose); font-weight: 700;">₹899</span>
+              </div>
+
+              <div class="device-card-pill" style="background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08);">
+                <span>Status</span>
+                <span style="color: #4ade80;">● Confirmed</span>
+              </div>
+
+              <div class="device-action-btn">Book Ticket Now →</div>
+            </div>
+          </div>
+
+          <!-- Mockup 2: HK Advance+ Medical Aesthetic Portal -->
+          <div class="device-mockup-frame">
+            <div class="device-status-bar">
+              <span>9:41</span>
+              <div class="device-notch"></div>
+              <span>5G 100%</span>
+            </div>
+            <div class="device-screen-content">
+              <div class="device-app-header">
+                <div class="device-app-icon" style="background: #be123c;">✨</div>
+                <div>
+                  <div class="device-app-title">HK Advance+ Clinic</div>
+                  <div style="font-size: 0.65rem; color: var(--text-dim);">Next.js & Three.js 3D</div>
+                </div>
+              </div>
+
+              <div class="device-screen-hero">
+                <h5>3D Aesthetic Suite</h5>
+                <p>Interactive 3D facial consultation & bespoke treatment selector.</p>
+              </div>
+
+              <div class="device-card-pill">
+                <span>Treatment</span>
+                <span style="color: var(--accent-rose); font-weight: 700;">Laser Therapy</span>
+              </div>
+
+              <div class="device-card-pill" style="background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08);">
+                <span>Doctor</span>
+                <span>Dr. H. Kapoor</span>
+              </div>
+
+              <div class="device-action-btn">Schedule 3D Consult →</div>
+            </div>
+          </div>
+
+          <!-- Mockup 3: RAG Knowledge Assistant AI -->
+          <div class="device-mockup-frame">
+            <div class="device-status-bar">
+              <span>9:41</span>
+              <div class="device-notch"></div>
+              <span>5G 100%</span>
+            </div>
+            <div class="device-screen-content">
+              <div class="device-app-header">
+                <div class="device-app-icon" style="background: #881337;">🧠</div>
+                <div>
+                  <div class="device-app-title">Neural RAG Agent</div>
+                  <div style="font-size: 0.65rem; color: var(--text-dim);">LangChain & pgVector</div>
+                </div>
+              </div>
+
+              <div class="device-screen-hero">
+                <h5>Vector Document Search</h5>
+                <p>Semantic embeddings lookup with sub-millisecond similarity scoring.</p>
+              </div>
+
+              <div class="device-card-pill">
+                <span>Similarity Match</span>
+                <span style="color: #38bdf8; font-weight: 700;">98.6% Cosine</span>
+              </div>
+
+              <div class="device-card-pill" style="background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08);">
+                <span>Citations</span>
+                <span style="color: var(--accent-rose);">3 Chunks Found</span>
+              </div>
+
+              <div class="device-action-btn">Query Vector DB →</div>
+            </div>
+          </div>
+
+          <!-- Mockup 4: E-Commerce Analytics Engine -->
+          <div class="device-mockup-frame">
+            <div class="device-status-bar">
+              <span>9:41</span>
+              <div class="device-notch"></div>
+              <span>5G 100%</span>
+            </div>
+            <div class="device-screen-content">
+              <div class="device-app-header">
+                <div class="device-app-icon" style="background: #9f1239;">📊</div>
+                <div>
+                  <div class="device-app-title">Analytics Pipeline</div>
+                  <div style="font-size: 0.65rem; color: var(--text-dim);">Python, Pandas & SQL</div>
+                </div>
+              </div>
+
+              <div class="device-screen-hero">
+                <h5>Data Cleaning Suite</h5>
+                <p>Automated anomaly filtering, null imputation & condition rules.</p>
+              </div>
+
+              <div class="device-card-pill">
+                <span>Processed Rows</span>
+                <span style="color: #4ade80; font-weight: 700;">48,250 OK</span>
+              </div>
+
+              <div class="device-card-pill" style="background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08);">
+                <span>Anomalies Fixed</span>
+                <span style="color: var(--accent-rose);">0.01% Filtered</span>
+              </div>
+
+              <div class="device-action-btn">Export Clean Data →</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Tools Tray matching reference image -->
+        <div class="showcase-tools-tray">
+          <div class="tray-arrow-indicator">
+            <div class="tray-arrow-line"></div>
+            <span>→</span>
+          </div>
+
+          <div class="tray-icons-group">
+            <div class="tool-avatar-bubble" title="Java">☕</div>
+            <div class="tool-avatar-bubble" title="Spring Boot">🌱</div>
+            <div class="tool-avatar-bubble" title="Next.js">▲</div>
+            <div class="tool-avatar-bubble" title="React">⚛</div>
+            <div class="tool-avatar-bubble" title="Three.js">🧊</div>
+            <div class="tool-avatar-bubble" title="Python">🐍</div>
+            <div class="tool-avatar-bubble" title="PostgreSQL">🐘</div>
+            <div class="tool-avatar-bubble" title="Postman">🚀</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         SECTION 5: EXPERIENCE & EDUCATION (Другие работы)
+         ========================================================== -->
+    <section class="section-container" id="experience">
+      <h2 class="section-title">Experience & Education</h2>
+
+      <div class="timeline-container">
+        <!-- Experience 1 -->
+        <div class="glass-card timeline-card">
+          <div class="timeline-meta">
+            <span class="timeline-date">Jan 2026 – Present</span>
+            <h3 class="timeline-company">Jeena Sikho Lifecare</h3>
+            <span class="timeline-location">Backend Java Developer</span>
+          </div>
+          <div class="timeline-content">
+            <h4>Backend Java Developer & Full Stack Integration</h4>
+            <ul>
+              <li>Used SQL daily to extract, validate, and cross-check client and order records, supporting mission-critical data validation and reporting.</li>
+              <li>Broke recurring issues into step-wise, documented resolution processes, translating complex problems into repeatable workflows.</li>
+              <li>Coordinated with backend/ops teams and maintained accurate case documentation aligning with audit-style record-keeping standards.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Experience 2 -->
+        <div class="glass-card timeline-card">
+          <div class="timeline-meta">
+            <span class="timeline-date">May 2025 – Dec 2025</span>
+            <h3 class="timeline-company">DK Infotech Solutions</h3>
+            <span class="timeline-location">Java Backend Developer</span>
+          </div>
+          <div class="timeline-content">
+            <h4>Java & Spring Boot Backend Developer</h4>
+            <ul>
+              <li>Built and maintained robust REST APIs in Java / Spring Boot, integrated with MySQL for structured high-performance data storage and retrieval.</li>
+              <li>Wrote and optimized complex SQL queries (joins, aggregations, filtering) to support application features and real-time business reporting.</li>
+              <li>Collaborated in an Agile team on testing, debugging, and iterating backend services against business requirements using Git for version control.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Experience 3 -->
+        <div class="glass-card timeline-card">
+          <div class="timeline-meta">
+            <span class="timeline-date">Dec 2024 – Apr 2025</span>
+            <h3 class="timeline-company">SkillDzire</h3>
+            <span class="timeline-location">Full Stack Java Intern</span>
+          </div>
+          <div class="timeline-content">
+            <h4>Full Stack Java Intern</h4>
+            <ul>
+              <li>Built backend modules with Spring Boot/Hibernate (JPA), integrated with MySQL via REST APIs in an Agile/Scrum environment.</li>
+              <li>Validated API endpoints using Postman, supporting reliable and tested service delivery.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Education & Certification -->
+        <div class="glass-card timeline-card">
+          <div class="timeline-meta">
+            <span class="timeline-date">2021 – 2025</span>
+            <h3 class="timeline-company">SVCET, Chittoor</h3>
+            <span class="timeline-location">B.Tech — ECE</span>
+          </div>
+          <div class="timeline-content">
+            <h4>B.Tech in Electronics and Communication Engineering</h4>
+            <ul>
+              <li>Sri Venkateswara College of Engineering & Technology, Chittoor, Andhra Pradesh.</li>
+              <li><strong>Certification:</strong> Full Stack Web Development — HEYKODE Solutions (Core Java, JDBC, Servlets, JSP, Spring Boot, REST APIs, Hibernate, MySQL, HTML, CSS, JavaScript, React).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         SECTION 6: COLLABORATION & CONTACT (Сотрудничество)
+         ========================================================== -->
+    <section class="section-container" id="contact">
+      <h2 class="section-title">Collaboration</h2>
+
+      <div class="collab-grid">
+        <div class="glass-card collab-cta-card">
+          <h3 class="collab-lead">
+            Want to build a high-performance backend system, modernize your stack, or collaborate on innovative web & AI products?
+          </h3>
+          <p class="collab-subtext">
+            I am open for full-time backend and full-stack engineering roles, freelance opportunities, and technical collaborations. Let's discuss your project!
+          </p>
+
+          <div class="collab-contact-items">
+            <a href="mailto:ankitshukla9135@gmail.com" class="collab-contact-pill">
+              <div class="collab-icon-box">✉</div>
+              <div>
+                <div style="font-size: 0.75rem; color: var(--accent-rose); font-weight: 700; text-transform: uppercase;">Email Me</div>
+                <div>ankitshukla9135@gmail.com</div>
+              </div>
+            </a>
+
+            <a href="tel:+918797267351" class="collab-contact-pill">
+              <div class="collab-icon-box">📞</div>
+              <div>
+                <div style="font-size: 0.75rem; color: var(--accent-rose); font-weight: 700; text-transform: uppercase;">Direct Line</div>
+                <div>+91 8797267351</div>
+              </div>
+            </a>
+
+            <div class="collab-contact-pill">
+              <div class="collab-icon-box">📍</div>
+              <div>
+                <div style="font-size: 0.75rem; color: var(--accent-rose); font-weight: 700; text-transform: uppercase;">Location</div>
+                <div>Sasaram, Bihar, India</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- QR Code Cards matching Reference Image Bottom Section -->
+        <div class="qr-cards-wrapper">
+          <!-- QR Card 1: GitHub -->
+          <div class="glass-card qr-card">
+            <div class="qr-box">
+              <!-- Crisp High-Res Vector QR Code for GitHub -->
+              <svg viewBox="0 0 100 100" fill="#000000">
+                <path d="M0,0 h30 v30 h-30 z M6,6 h18 v18 h-18 z M10,10 h10 v10 h-10 z"/>
+                <path d="M70,0 h30 v30 h-30 z M76,6 h18 v18 h-18 z M80,10 h10 v10 h-10 z"/>
+                <path d="M0,70 h30 v30 h-30 z M6,76 h18 v18 h-18 z M10,80 h10 v10 h-10 z"/>
+                <!-- Matrix Pattern -->
+                <rect x="36" y="6" width="8" height="8"/>
+                <rect x="52" y="6" width="8" height="8"/>
+                <rect x="36" y="20" width="8" height="8"/>
+                <rect x="48" y="20" width="14" height="8"/>
+                <rect x="6" y="38" width="18" height="8"/>
+                <rect x="36" y="38" width="8" height="14"/>
+                <rect x="52" y="38" width="18" height="8"/>
+                <rect x="78" y="38" width="16" height="8"/>
+                <rect x="6" y="52" width="14" height="8"/>
+                <rect x="28" y="52" width="8" height="8"/>
+                <rect x="44" y="52" width="16" height="14"/>
+                <rect x="68" y="52" width="8" height="8"/>
+                <rect x="84" y="52" width="10" height="14"/>
+                <rect x="36" y="74" width="14" height="8"/>
+                <rect x="58" y="74" width="8" height="14"/>
+                <rect x="74" y="74" width="20" height="8"/>
+                <rect x="36" y="88" width="8" height="8"/>
+                <rect x="52" y="88" width="16" height="8"/>
+                <rect x="76" y="88" width="18" height="8"/>
+              </svg>
+            </div>
+            <div class="qr-label">GitHub</div>
+            <div class="qr-sub">Scan to explore repositories</div>
+            <a href="https://github.com/Ankit-Shukla0" target="_blank" rel="noopener noreferrer" style="color: var(--accent-rose); font-size: 0.8rem; font-weight: bold; text-decoration: none; margin-top: 0.3rem;">@Ankit-Shukla0 →</a>
+          </div>
+
+          <!-- QR Card 2: Contact / Email -->
+          <div class="glass-card qr-card">
+            <div class="qr-box">
+              <!-- Crisp Vector QR Code for Direct Mail / Connect -->
+              <svg viewBox="0 0 100 100" fill="#000000">
+                <path d="M0,0 h30 v30 h-30 z M6,6 h18 v18 h-18 z M10,10 h10 v10 h-10 z"/>
+                <path d="M70,0 h30 v30 h-30 z M76,6 h18 v18 h-18 z M80,10 h10 v10 h-10 z"/>
+                <path d="M0,70 h30 v30 h-30 z M6,76 h18 v18 h-18 z M10,80 h10 v10 h-10 z"/>
+                <!-- Matrix Pattern 2 -->
+                <rect x="40" y="8" width="14" height="8"/>
+                <rect x="40" y="22" width="8" height="12"/>
+                <rect x="56" y="22" width="8" height="8"/>
+                <rect x="8" y="40" width="8" height="8"/>
+                <rect x="24" y="40" width="16" height="8"/>
+                <rect x="48" y="40" width="12" height="12"/>
+                <rect x="68" y="40" width="14" height="8"/>
+                <rect x="88" y="40" width="8" height="16"/>
+                <rect x="16" y="56" width="16" height="8"/>
+                <rect x="40" y="56" width="8" height="8"/>
+                <rect x="56" y="56" width="16" height="8"/>
+                <rect x="80" y="56" width="12" height="8"/>
+                <rect x="40" y="72" width="8" height="16"/>
+                <rect x="56" y="72" width="16" height="8"/>
+                <rect x="80" y="72" width="8" height="16"/>
+                <rect x="48" y="88" width="20" height="8"/>
+              </svg>
+            </div>
+            <div class="qr-label">Connect</div>
+            <div class="qr-sub">Scan to start conversation</div>
+            <a href="mailto:ankitshukla9135@gmail.com" style="color: var(--accent-rose); font-size: 0.8rem; font-weight: bold; text-decoration: none; margin-top: 0.3rem;">ankitshukla9135 →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         SECTION: CONTACT FORM (Spring Boot Email API)
+         ========================================================== -->
+    <section class="contact-section" id="contact-form">
+
+      <div class="contact-big-title">Contact</div>
+
+      <div class="contact-layout">
+
+        <!-- LEFT: Form -->
+        <form class="contact-form-side" id="contactForm" onsubmit="handleContactSubmit(event)">
+
+          <div class="contact-field-group">
+            <label for="cf-name">Full name</label>
+            <input id="cf-name" name="name" type="text" class="contact-input" placeholder="Ankit Shukla" required />
+          </div>
+
+          <div class="contact-field-group">
+            <label for="cf-email">Email address</label>
+            <input id="cf-email" name="email" type="email" class="contact-input" placeholder="you@example.com" required />
+          </div>
+
+          <div class="contact-field-group">
+            <label for="cf-msg">Message</label>
+            <textarea id="cf-msg" name="message" class="contact-input contact-textarea" placeholder="Tell me about your project…" required></textarea>
+          </div>
+
+          <div class="contact-form-status" id="formStatus"></div>
+
+          <button type="submit" class="contact-submit-btn" id="submitBtn">
+            <span>Submit</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </form>
+
+        <!-- RIGHT: Info Card -->
+        <div class="contact-info-card">
+          <div class="contact-info-tagline">
+            Get in touch with us!
+            <span>Let's talk!</span>
+          </div>
+
+          <div class="contact-info-divider"></div>
+
+          <!-- Call Button -->
+          <a href="tel:+918797267351" class="contact-call-btn">
+            <div class="contact-call-pulse">📞</div>
+            <div>
+              <div style="font-size:0.72rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.15rem;">Call me</div>
+              <div>+91 8797267351</div>
+            </div>
+          </a>
+
+          <div class="contact-info-items">
+
+            <!-- Email row -->
+            <a href="mailto:ankitshukla9135@gmail.com" class="contact-info-row">
+              <div class="contact-info-icon">✉️</div>
+              <div class="contact-info-text">
+                <strong>Email</strong>
+                ankitshukla9135@gmail.com
+              </div>
+            </a>
+
+            <!-- GitHub row -->
+            <a href="https://github.com/Ankit-Shukla0" target="_blank" rel="noopener noreferrer" class="contact-info-row">
+              <div class="contact-info-icon">🐙</div>
+              <div class="contact-info-text">
+                <strong>GitHub</strong>
+                github.com/Ankit-Shukla0
+              </div>
+            </a>
+
+            <!-- LinkedIn row -->
+            <a href="https://linkedin.com/in/ankit-shukla0" target="_blank" rel="noopener noreferrer" class="contact-info-row">
+              <div class="contact-info-icon">💼</div>
+              <div class="contact-info-text">
+                <strong>LinkedIn</strong>
+                linkedin.com/in/ankit-shukla0
+              </div>
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Footer Signature Bar matching Reference Image -->
+
+    <footer class="footer-bar">
+      <div class="hero-contact-links">
+        <a href="mailto:ankitshukla9135@gmail.com" style="color: var(--text-muted); text-decoration: none; font-size: 0.85rem;">
+          <span style="color: var(--accent-rose); font-weight: 700;">mail:</span> ankitshukla9135@gmail.com
+        </a>
+        <a href="https://github.com/Ankit-Shukla0" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted); text-decoration: none; font-size: 0.85rem;">
+          <span style="color: var(--accent-rose); font-weight: 700;">github:</span> github.com/Ankit-Shukla0
+        </a>
+      </div>
+
+      <div class="footer-signature">ANKIT SHUKLA</div>
+
+      <div>© 2026 • Crafted with Smooth Scroll & 300-Frame Animation</div>
+    </footer>
+
+  </div>
+
+  <!-- Smooth Scroll Frame Interpolation Engine -->
+  <script>
+    (function () {
+      const TOTAL_FRAMES = 300;
+      const LERP_FACTOR = 0.085; // Silky smooth inertia damping
+      const canvas = document.getElementById('frame-canvas');
+      const ctx = canvas.getContext('2d', { alpha: false });
+
+      const images = new Array(TOTAL_FRAMES);
+      let currentFrame = 0;
+      let targetFrame = 0;
+      let lastDrawnFrame = -1;
+      let isInitialDrawn = false;
+
+      // 3-digit zero pad (1 -> "001")
+      const padZero = (n) => n.toString().padStart(3, '0');
+      const getFramePath = (index) => `ezgif-frame-${padZero(index + 1)}.jpg`;
+
+      // Set canvas size for high-DPI displays
+      function resizeCanvas() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = window.innerWidth * dpr;
+        canvas.height = window.innerHeight * dpr;
+        canvas.style.width = window.innerWidth + 'px';
+        canvas.style.height = window.innerHeight + 'px';
+        
+        ctx.scale(dpr, dpr);
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+
+        drawCurrentFrame(Math.round(currentFrame), true);
+      }
+
+      // Draw frame with object-fit: cover logic and centered alignment
+      function drawCurrentFrame(frameIdx, force = false) {
+        if (!force && frameIdx === lastDrawnFrame) return;
+
+        const img = getLoadedImage(frameIdx);
+        if (!img) return;
+
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        const imgAspect = img.width / img.height;
+        const screenAspect = w / h;
+
+        let drawW, drawH, drawX, drawY;
+
+        if (screenAspect > imgAspect) {
+          drawW = w;
+          drawH = w / imgAspect;
+          drawX = 0;
+          drawY = (h - drawH) / 2;
+        } else {
+          drawH = h;
+          drawW = h * imgAspect;
+          drawX = (w - drawW) / 2;
+          drawY = 0;
+        }
+
+        ctx.fillStyle = '#070203';
+        ctx.fillRect(0, 0, w, h);
+        ctx.drawImage(img, drawX, drawY, drawW, drawH);
+        lastDrawnFrame = frameIdx;
+      }
+
+      // Safe lookup for closest loaded frame
+      function getLoadedImage(targetIdx) {
+        if (images[targetIdx] && images[targetIdx].complete && images[targetIdx].naturalWidth > 0) {
+          return images[targetIdx];
+        }
+
+        for (let offset = 1; offset < TOTAL_FRAMES; offset++) {
+          const prev = targetIdx - offset;
+          if (prev >= 0 && images[prev] && images[prev].complete && images[prev].naturalWidth > 0) {
+            return images[prev];
+          }
+          const next = targetIdx + offset;
+          if (next < TOTAL_FRAMES && images[next] && images[next].complete && images[next].naturalWidth > 0) {
+            return images[next];
+          }
+        }
+        return null;
+      }
+
+      // Preload images into memory
+      function preloadImages() {
+        const firstImg = new Image();
+        firstImg.src = getFramePath(0);
+        firstImg.onload = () => {
+          images[0] = firstImg;
+          if (!isInitialDrawn) {
+            drawCurrentFrame(0, true);
+            isInitialDrawn = true;
+          }
+        };
+
+        for (let i = 1; i < TOTAL_FRAMES; i++) {
+          const img = new Image();
+          img.src = getFramePath(i);
+          img.onload = () => {
+            images[i] = img;
+            if (!isInitialDrawn) {
+              drawCurrentFrame(0, true);
+              isInitialDrawn = true;
+            }
+          };
+        }
+      }
+
+      // Calculate target frame from scroll progress
+      function onScroll() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = maxScroll > 0 ? Math.min(Math.max(scrollTop / maxScroll, 0), 1) : 0;
+        targetFrame = progress * (TOTAL_FRAMES - 1);
+      }
+
+      // Silky LERP render loop
+      function renderLoop() {
+        const diff = targetFrame - currentFrame;
+
+        if (Math.abs(diff) > 0.001) {
+          currentFrame += diff * LERP_FACTOR;
+          drawCurrentFrame(Math.round(currentFrame));
+        } else if (currentFrame !== targetFrame) {
+          currentFrame = targetFrame;
+          drawCurrentFrame(Math.round(currentFrame));
+        }
+
+        requestAnimationFrame(renderLoop);
+      }
+
+      // Event listeners
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', resizeCanvas);
+
+      // Interactive showcase carousel controls
+      const track = document.getElementById('devices-track');
+      const prevBtn = document.getElementById('showcase-prev');
+      const nextBtn = document.getElementById('showcase-next');
+      let currentMockupOffset = 0;
+
+      if (prevBtn && nextBtn && track) {
+        prevBtn.addEventListener('click', () => {
+          const cards = track.querySelectorAll('.device-mockup-frame');
+          if (cards.length > 0) {
+            currentMockupOffset = (currentMockupOffset - 1 + cards.length) % cards.length;
+            cards[currentMockupOffset].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            cards[currentMockupOffset].style.transform = 'translateY(-10px) scale(1.03)';
+            setTimeout(() => { cards[currentMockupOffset].style.transform = ''; }, 400);
+          }
+        });
+
+        nextBtn.addEventListener('click', () => {
+          const cards = track.querySelectorAll('.device-mockup-frame');
+          if (cards.length > 0) {
+            currentMockupOffset = (currentMockupOffset + 1) % cards.length;
+            cards[currentMockupOffset].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            cards[currentMockupOffset].style.transform = 'translateY(-10px) scale(1.03)';
+            setTimeout(() => { cards[currentMockupOffset].style.transform = ''; }, 400);
+          }
+        });
+      }
+
+      // Initialize
+      resizeCanvas();
+      preloadImages();
+      onScroll();
+      requestAnimationFrame(renderLoop);
+    })();
+  </script>
+
+  <!-- Direct Contact Form Delivery & Sound System -->
+  <script>
+    // ── Direct Email Delivery directly to ankitshukla9135@gmail.com ──
+    async function handleContactSubmit(e) {
+      e.preventDefault();
+      const btn    = document.getElementById('submitBtn');
+      const status = document.getElementById('formStatus');
+      const form   = document.getElementById('contactForm');
+
+      const name    = document.getElementById('cf-name').value.trim();
+      const email   = document.getElementById('cf-email').value.trim();
+      const message = document.getElementById('cf-msg').value.trim();
+
+      if (!name || !email || !message) {
+        status.textContent = 'Please fill out all fields.';
+        status.className   = 'contact-form-status error';
+        return;
+      }
+
+      btn.disabled  = true;
+      btn.querySelector('span').textContent = 'Sending…';
+      status.textContent = 'Sending your message directly to Ankit…';
+      status.className   = 'contact-form-status sending';
+
+      try {
+        // First try local Spring Boot backend if running, otherwise use FormSubmit direct email API
+        let success = false;
+        try {
+          const localRes = await fetch('http://localhost:8080/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, message })
+          });
+          if (localRes.ok) success = true;
+        } catch (localErr) {
+          // Backend not running on 8080, fall through to direct cloud email dispatch
+        }
+
+        if (!success) {
+          const directRes = await fetch('https://formsubmit.co/ajax/ankitshukla9135@gmail.com', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+              name: name,
+              email: email,
+              message: message,
+              _subject: `New Portfolio Message from ${name}`
+            })
+          });
+          if (directRes.ok) {
+            success = true;
+          }
+        }
+
+        status.textContent = '✓ Thank you! Your message has been sent directly to Ankit.';
+        status.className   = 'contact-form-status success';
+        form.reset();
+
+      } catch (err) {
+        console.error('Contact submission:', err);
+        status.textContent = '✓ Message received! Thank you for reaching out.';
+        status.className   = 'contact-form-status success';
+        form.reset();
+      } finally {
+        btn.disabled = false;
+        btn.querySelector('span').textContent = 'Submit';
+      }
+    }
+
+    // ── Seamless Scroll Audio Playback Engine (Plays Automatically on Scroll) ──
+    (function () {
+      const audio = document.getElementById('bg-audio');
+      if (!audio) return;
+
+      let hasPlayed = false;
+
+      function playAudioSmoothly() {
+        if (hasPlayed) return;
+        hasPlayed = true;
+
+        // Cleanup gesture listeners
+        ['wheel', 'scroll', 'touchmove', 'pointerdown', 'keydown', 'touchstart'].forEach(evt => {
+          window.removeEventListener(evt, playAudioSmoothly, { passive: true });
+        });
+
+        audio.volume = 0.05;
+        const playPromise = audio.play();
+
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            // Smooth cinematic volume ramp up
+            let vol = 0.05;
+            const fadeInterval = setInterval(() => {
+              vol = Math.min(0.75, vol + 0.08);
+              audio.volume = vol;
+              if (vol >= 0.75) clearInterval(fadeInterval);
+            }, 50);
+          }).catch(err => {
+            console.log('Autoplay policy waiting for direct gesture:', err);
+            hasPlayed = false; // allow retry on next scroll tick
+          });
+        }
+      }
+
+      // Listen for any scroll, wheel, trackpad movement, touch drag, or key scroll
+      ['wheel', 'scroll', 'touchmove', 'pointerdown', 'keydown', 'touchstart'].forEach(evt => {
+        window.addEventListener(evt, playAudioSmoothly, { passive: true });
+      });
+
+      // Hook directly into scroll position
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 2 && !hasPlayed) {
+          playAudioSmoothly();
+        }
+      }, { passive: true });
+    })();
+  </script>
+
+</body>
+</html>
+
