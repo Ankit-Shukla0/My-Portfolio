@@ -2366,7 +2366,7 @@
 
       // 3-digit zero pad (1 -> "001")
       const padZero = (n) => n.toString().padStart(3, '0');
-      const getFramePath = (index) => `ezgif-frame-${padZero(index + 1)}.jpg`;
+      const getFramePath = (index) => `frames/ezgif-frame-${padZero(index + 1)}.jpg`;
 
       // Set canvas size for high-DPI displays
       function resizeCanvas() {
@@ -2436,24 +2436,19 @@
 
       // Preload images into memory
       function preloadImages() {
-        const firstImg = new Image();
-        firstImg.src = getFramePath(0);
-        firstImg.onload = () => {
-          images[0] = firstImg;
-          if (!isInitialDrawn) {
-            drawCurrentFrame(0, true);
-            isInitialDrawn = true;
-          }
-        };
-
-        for (let i = 1; i < TOTAL_FRAMES; i++) {
+        for (let i = 0; i < TOTAL_FRAMES; i++) {
           const img = new Image();
           img.src = getFramePath(i);
           img.onload = () => {
             images[i] = img;
-            if (!isInitialDrawn) {
+            if (!isInitialDrawn && (i === 0 || images[0])) {
               drawCurrentFrame(0, true);
               isInitialDrawn = true;
+            }
+          };
+          img.onerror = () => {
+            if (img.src.includes('frames/')) {
+              img.src = `ezgif-frame-${padZero(i + 1)}.jpg`;
             }
           };
         }
