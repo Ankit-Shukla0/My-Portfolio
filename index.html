@@ -411,19 +411,29 @@
 
     .hero-big-role {
       font-family: var(--font-display);
-      font-size: clamp(2.4rem, 8.5vw, 7.5rem);
+      font-size: clamp(2rem, 5vw, 4.4rem);
       font-weight: 900;
-      line-height: 0.9;
+      line-height: 1.05;
       text-transform: uppercase;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.02em;
       color: #fff;
       text-shadow: 0 4px 25px rgba(0, 0, 0, 0.9);
+      margin-top: 0.35rem;
     }
 
     .hero-big-role .outline-text {
       color: transparent;
-      -webkit-text-stroke: clamp(1px, 0.25vw, 2px) rgba(255, 255, 255, 0.85);
-      display: block;
+      -webkit-text-stroke: clamp(1px, 0.2vw, 2px) rgba(255, 255, 255, 0.85);
+      display: inline;
+    }
+
+    .hero-subheadline {
+      font-size: clamp(0.92rem, 1.35vw, 1.12rem);
+      line-height: 1.6;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin-top: 0.9rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
     }
 
     .hero-bottom-bar {
@@ -776,6 +786,29 @@
       padding: 0.25rem 0.65rem;
       border-radius: 6px;
       border: 1px solid rgba(244, 63, 94, 0.2);
+    }
+
+    .project-live-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fff;
+      background: rgba(225, 29, 72, 0.25);
+      border: 1px solid var(--accent-rose);
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .project-live-link:hover {
+      background: var(--accent-rose);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(244, 63, 94, 0.45);
     }
 
     /* ==========================================================
@@ -2015,6 +2048,7 @@
         <ul class="nav-links-menu" id="navLinksMenu">
           <li><a href="#" class="nav-link-anchor">Home</a></li>
           <li><a href="#about" class="nav-link-anchor">About</a></li>
+          <li><a href="#services" class="nav-link-anchor">Services</a></li>
           <li><a href="#workflow" class="nav-link-anchor">Skills</a></li>
           <li><a href="#showcase" class="nav-link-anchor">Showcase</a></li>
           <li><a href="#projects" class="nav-link-anchor">Projects</a></li>
@@ -2043,18 +2077,21 @@
 
       <div class="hero-middle-grid">
         <div class="hero-left-stack">
-          <div class="hero-stack-item">JAVA</div>
-          <div class="hero-stack-item">WITH AI</div>
-          <div class="hero-stack-item">B.TECH ECE</div>
+          <div class="hero-stack-item">FULL STACK</div>
+          <div class="hero-stack-item">AI AGENTS</div>
+          <div class="hero-stack-item">SPRING &amp; REACT</div>
         </div>
 
         <div></div>
 
         <div class="hero-right-designer">
-          <div class="hero-author-tag">ANKIT SHUKLA • B.TECH ECE</div>
-          <div class="hero-big-role">
-            DEVE<span class="outline-text">LOPER</span>
-          </div>
+          <div class="hero-author-tag">ANKIT SHUKLA • FULL STACK &amp; AI</div>
+          <h1 class="hero-big-role">
+            Full Stack Developer <span class="outline-text">&amp; AI Agent Builder</span>
+          </h1>
+          <p class="hero-subheadline">
+            I build production-ready websites and AI-powered automation agents for businesses — Java Spring Boot, React/Next.js, and LangChain/RAG.
+          </p>
         </div>
       </div>
 
@@ -2084,9 +2121,9 @@
 
       <div class="about-grid">
         <div class="glass-card about-badge-card">
-          <span class="about-tag">Backend Engineer</span>
+          <span class="about-tag">Full Stack &amp; AI Agents</span>
           <h3 class="about-lead">
-            Building scalable Java/Spring Boot microservices, high-throughput SQL engines, and modern full-stack web platforms.
+            Building production-ready websites and AI-powered automation agents for modern businesses.
           </h3>
           
           <div class="about-stats">
@@ -2107,26 +2144,90 @@
 
         <div class="glass-card about-details-card">
           <p>
-            I am a dedicated Backend Engineer with solid foundation in <strong>Java, Spring Boot, REST APIs, OOP principles</strong>, and database optimization. Comfortable across the modern stack with <strong>React, Next.js, Three.js 3D web</strong>, and <strong>Python</strong> for AI/RAG knowledge assistants.
+            I'm a Full Stack Developer and AI Agent Developer who helps businesses ship production-ready websites and intelligent automation tools. I build fast, SEO-optimized frontends (React, Next.js, Three.js) backed by robust Java Spring Boot APIs, and design AI agents using LangChain, RAG pipelines, and vector databases (pgVector) to automate customer support, internal workflows, and knowledge retrieval.
           </p>
           <ul class="about-bullet-list">
             <li class="about-bullet-item">
               <span class="bullet-dot"></span>
-              <span>Architecting robust RESTful microservices with Spring Boot & Hibernate JPA</span>
+              <span>Architecting robust RESTful microservices with Spring Boot &amp; Hibernate JPA</span>
             </li>
             <li class="about-bullet-item">
               <span class="bullet-dot"></span>
-              <span>Advanced SQL query optimization (joins, aggregations, indexing) for MySQL & PostgreSQL</span>
+              <span>Advanced SQL query optimization (joins, aggregations, indexing) for MySQL &amp; PostgreSQL</span>
             </li>
             <li class="about-bullet-item">
               <span class="bullet-dot"></span>
-              <span>Interactive frontend development with Next.js App Router, React & Three.js</span>
+              <span>Interactive frontend development with Next.js App Router, React &amp; Three.js</span>
             </li>
             <li class="about-bullet-item">
               <span class="bullet-dot"></span>
-              <span>AI-driven RAG pipelines using Python, LangChain, pgVector & LLM embeddings</span>
+              <span>AI-driven RAG pipelines using Python, LangChain, pgVector &amp; LLM embeddings</span>
             </li>
           </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         SECTION: SERVICES (What I Offer)
+         ========================================================== -->
+    <section class="section-container" id="services">
+      <h2 class="section-title">Services</h2>
+
+      <div class="skills-grid">
+        <!-- Service 1 -->
+        <div class="glass-card skill-step-card">
+          <div class="step-pill-header">
+            <span class="step-pill-badge">01</span>
+            <h3 class="step-card-title">Website Development</h3>
+          </div>
+          <p class="step-card-body">
+            Custom, fast-loading business websites built with React/Next.js — from landing pages to multi-page marketing sites.
+          </p>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="glass-card skill-step-card">
+          <div class="step-pill-header">
+            <span class="step-pill-badge">02</span>
+            <h3 class="step-card-title">Full Stack Web Applications</h3>
+          </div>
+          <p class="step-card-body">
+            End-to-end web apps with Java Spring Boot backend + React frontend, including database design and REST APIs.
+          </p>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="glass-card skill-step-card">
+          <div class="step-pill-header">
+            <span class="step-pill-badge">03</span>
+            <h3 class="step-card-title">AI Agents for Business</h3>
+          </div>
+          <p class="step-card-body">
+            Custom AI agents that automate customer support, internal workflows, and document search — built with LangChain, RAG pipelines, and vector search.
+          </p>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="glass-card skill-step-card">
+          <div class="step-pill-header">
+            <span class="step-pill-badge">04</span>
+            <h3 class="step-card-title">Interactive &amp; 3D Web Experiences</h3>
+          </div>
+          <p class="step-card-body">
+            Immersive, animation-driven sites using Three.js/React Three Fiber — for brands that want to stand out.
+          </p>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="glass-card skill-step-card">
+          <div class="step-pill-header">
+            <span class="step-pill-badge">05</span>
+            <h3 class="step-card-title">Website Performance Optimization</h3>
+          </div>
+          <p class="step-card-body">
+            Speed and SEO audits with real fixes — reduced one client's load size by 77% (414KB to 95KB).
+          </p>
         </div>
       </div>
     </section>
@@ -2254,15 +2355,43 @@
       <h2 class="section-title">Featured Projects</h2>
 
       <div class="projects-grid">
-        <!-- Project 1 -->
+        <!-- Project 1 (Moved to Top) -->
+        <div class="glass-card project-card">
+          <div>
+            <div class="project-header">
+              <h3 class="project-name">RAG-Based Knowledge Assistant</h3>
+              <span class="project-badge">AI Agent</span>
+            </div>
+            <p class="project-description">
+              An AI agent that ingests documents, generates vector embeddings, and answers questions with context-aware, cited responses in real time — the same architecture used to build custom support and knowledge agents for businesses.
+            </p>
+            <ul class="project-features">
+              <li>Document ingestion and vector embedding pipeline using pgVector</li>
+              <li>Semantic similarity search in PostgreSQL for ultra-fast document lookups</li>
+              <li>LangChain LLM orchestration with iterative prompt engineering</li>
+            </ul>
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">LangChain</span>
+            <span class="project-tag">pgVector</span>
+            <span class="project-tag">PostgreSQL</span>
+            <span class="project-tag">OpenAI</span>
+          </div>
+        </div>
+
+        <!-- Project 2: HK Advance+ Clinic Website -->
         <div class="glass-card project-card">
           <div>
             <div class="project-header">
               <h3 class="project-name">HK Advance+ Clinic Website</h3>
-              <span class="project-badge">Production</span>
+              <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
+                <span class="project-badge">Production</span>
+                <a href="https://hkadvanceweb.com" target="_blank" rel="noopener noreferrer" class="project-live-link">View Live →</a>
+              </div>
             </div>
             <p class="project-description">
-              Production marketing platform for a medical aesthetics clinic featuring an interactive 3D hero scene built with Three.js/React Three Fiber, serverless consultation routes, and dynamic SEO.
+              Production marketing platform for a medical aesthetics clinic. Rebuilt the architecture from 69 files down to 7 key files and cut First Load JS from 414KB to 95.5KB — a 77% performance improvement — while adding a fully interactive 3D hero scene built with Three.js/React Three Fiber.
             </p>
             <ul class="project-features">
               <li>Interactive 3D hero scene with custom lighting & shaders</li>
@@ -2280,7 +2409,7 @@
           </div>
         </div>
 
-        <!-- Project 2 -->
+        <!-- Project 3: CheckMyBus Ticket Search Platform -->
         <div class="glass-card project-card">
           <div>
             <div class="project-header">
@@ -2302,31 +2431,6 @@
             <span class="project-tag">Hibernate</span>
             <span class="project-tag">MySQL</span>
             <span class="project-tag">Postman</span>
-          </div>
-        </div>
-
-        <!-- Project 3 -->
-        <div class="glass-card project-card">
-          <div>
-            <div class="project-header">
-              <h3 class="project-name">RAG-Based Knowledge Assistant</h3>
-              <span class="project-badge">GenAI / NLP</span>
-            </div>
-            <p class="project-description">
-              End-to-end retrieval-augmented generation (RAG) system for document ingestion, text embedding generation, vector similarity search, and accurate context-aware responses.
-            </p>
-            <ul class="project-features">
-              <li>Document ingestion and vector embedding pipeline using pgVector</li>
-              <li>Semantic similarity search in PostgreSQL for ultra-fast document lookups</li>
-              <li>LangChain LLM orchestration with iterative prompt engineering</li>
-            </ul>
-          </div>
-          <div class="project-tags">
-            <span class="project-tag">Python</span>
-            <span class="project-tag">LangChain</span>
-            <span class="project-tag">pgVector</span>
-            <span class="project-tag">PostgreSQL</span>
-            <span class="project-tag">OpenAI</span>
           </div>
         </div>
 
@@ -2625,10 +2729,10 @@
       <div class="collab-grid">
         <div class="glass-card collab-cta-card">
           <h3 class="collab-lead">
-            Want to build a high-performance backend system, modernize your stack, or collaborate on innovative web & AI products?
+            Need a website built, or want to automate your business with AI?
           </h3>
           <p class="collab-subtext">
-            I am open for full-time backend and full-stack engineering roles, freelance opportunities, and technical collaborations. Let's discuss your project!
+            I work with businesses to build production-ready websites and custom AI agents — from marketing sites to intelligent automation tools. Let's talk about your project.
           </p>
 
           <div class="collab-contact-items">
@@ -3214,6 +3318,10 @@
           title: 'About Me',
           src: 'Man_walking_and_sitting_on_202608282128.mp3'
         },
+        services: {
+          title: 'Services',
+          src: 'Man_walking_and_sitting_on_202608282128.mp3'
+        },
         workflow: {
           title: 'Skills & Architecture',
           src: 'Man_walking_and_sitting_on_202608282128.mp3'
@@ -3420,7 +3528,7 @@
 
       // Initialize Section Observer
       function initObserver() {
-        const sectionsToWatch = ['hero', 'about', 'workflow', 'projects', 'showcase', 'experience', 'contact'];
+        const sectionsToWatch = ['hero', 'about', 'services', 'workflow', 'projects', 'showcase', 'experience', 'contact'];
 
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
