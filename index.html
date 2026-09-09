@@ -349,21 +349,40 @@
       position: relative;
     }
 
-    .hero-top-title {
-      font-family: var(--font-serif);
-      font-size: clamp(2.8rem, 10vw, 8.8rem);
-      font-weight: 900;
-      line-height: 0.92;
-      letter-spacing: -0.03em;
-      color: rgba(255, 255, 255, 0.9);
-      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.9);
-      user-select: none;
-      text-align: left;
+    .hero-tagline-badge {
+      font-family: var(--font-display);
+      font-size: clamp(0.68rem, 0.9vw, 0.82rem);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-rose);
+      background: rgba(225, 29, 72, 0.15);
+      padding: 0.28rem 0.85rem;
+      border-radius: 100px;
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      width: fit-content;
+      max-width: max-content;
+      white-space: nowrap;
+      margin-bottom: 0.5rem;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-tagline-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 10px #10b981;
+      display: inline-block;
+      flex-shrink: 0;
     }
 
     .hero-middle-grid {
       display: grid;
-      grid-template-columns: 1fr auto 1fr;
+      grid-template-columns: 1.15fr minmax(280px, 28vw) 1.15fr;
       align-items: center;
       margin: clamp(1rem, 3vh, 2.5rem) 0;
       gap: 1.5rem;
@@ -377,7 +396,7 @@
 
     .hero-stack-item {
       font-family: var(--font-display);
-      font-size: clamp(1.3rem, 4vw, 3.4rem);
+      font-size: clamp(1.05rem, 2.2vw, 2.1rem);
       font-weight: 900;
       line-height: 1.05;
       text-transform: uppercase;
@@ -391,13 +410,15 @@
       display: flex;
       flex-direction: column;
       align-items: flex-end;
+      max-width: 600px;
+      justify-self: end;
     }
 
     .hero-author-tag {
       font-family: var(--font-display);
-      font-size: clamp(0.75rem, 1.3vw, 1.15rem);
+      font-size: clamp(0.68rem, 0.95vw, 0.85rem);
       font-weight: 800;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--accent-rose);
       margin-bottom: 0.5rem;
@@ -1788,12 +1809,12 @@
     /* ── Tablet Landscape / Medium Screens (769px – 1024px) ── */
     @media (max-width: 1024px) {
       .hero-middle-grid {
-        grid-template-columns: 1fr;
-        gap: 1.2rem;
+        grid-template-columns: 1fr minmax(180px, 22vw) 1.15fr;
+        gap: 1rem;
       }
       .hero-right-designer {
-        align-items: flex-start;
-        text-align: left;
+        align-items: flex-end;
+        text-align: right;
       }
       .about-grid,
       .skills-grid,
@@ -1845,7 +1866,7 @@
       }
       .hero-section {
         min-height: auto;
-        padding: 5rem 1rem 2rem;
+        padding: clamp(7.5rem, 24vh, 12rem) 1.25rem 2.5rem;
         gap: 2rem;
       }
       .hero-middle-grid {
@@ -1856,6 +1877,12 @@
       .hero-right-designer {
         align-items: flex-start;
         text-align: left;
+      }
+      .hero-tagline-badge {
+        font-size: 0.65rem;
+        letter-spacing: 0.06em;
+        padding: 0.25rem 0.65rem;
+        margin-bottom: 0.25rem;
       }
       .hero-bottom-bar {
         flex-direction: column;
@@ -1906,13 +1933,16 @@
         display: none;
       }
       .hero-section {
-        padding: 4.5rem 0.75rem 2rem;
+        padding: clamp(10.5rem, 30vh, 14.5rem) 0.85rem 2rem;
       }
-      .hero-top-title {
-        font-size: clamp(2.4rem, 12vw, 3.8rem);
+      .hero-tagline-badge {
+        font-size: 0.62rem;
+        letter-spacing: 0.05em;
+        padding: 0.22rem 0.6rem;
       }
+
       .hero-stack-item {
-        font-size: clamp(1.25rem, 6vw, 1.8rem);
+        font-size: clamp(0.95rem, 4.5vw, 1.35rem);
       }
       .hero-big-role {
         font-size: clamp(1.4rem, 6.8vw, 2.3rem);
@@ -2075,7 +2105,10 @@
          HERO SECTION (Matching Reference Image 1)
          ========================================================== -->
     <section class="hero-section" id="hero">
-      <div class="hero-top-title">Portfolio</div>
+      <div class="hero-tagline-badge">
+        <span class="hero-tagline-dot"></span>
+        <span>Available for Freelance Projects</span>
+      </div>
 
       <div class="hero-middle-grid">
         <div class="hero-left-stack">
@@ -3013,12 +3046,12 @@
           drawX = (w - drawW) / 2;
           drawY = 0;
         } else {
-          // Mobile portrait (320px - 480px)
-          // Keep subject comfortably framed and centered with head completely visible
-          drawW = Math.max(w * 1.45, h * 0.85);
-          drawH = drawW / imgAspect;
+          // Mobile portrait (320px - 768px)
+          // Cover full height so subject stands centered & tall, head anchored at top
+          drawH = h;
+          drawW = h * imgAspect;
           drawX = (w - drawW) / 2;
-          drawY = Math.max(0, (h - drawH) * 0.10);
+          drawY = 0;
         }
 
         ctx.fillStyle = '#070203';
