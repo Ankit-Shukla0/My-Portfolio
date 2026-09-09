@@ -3,7 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ankit Shukla — Backend & Full Stack Developer Portfolio</title>
+  <title>Ankit Shukla — Full Stack Developer & AI Agent Builder</title>
+  <meta name="description" content="Ankit Shukla is a Full Stack Developer & AI Agent Builder based in Bihar, India. Expert in React, Next.js, Java Spring Boot, LangChain, RAG architectures, and autonomous AI Agents.">
+  <meta name="keywords" content="full stack developer, AI agent developer, React developer, Java Spring Boot developer, Next.js developer, freelance web developer India, LangChain, RAG, AI agents, Bihar, India, Ankit Shukla">
+  <meta name="author" content="Ankit Shukla">
+  <link rel="canonical" href="https://ankitshukla.dev/">
+
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ankit Shukla — Full Stack Developer & AI Agent Builder">
+  <meta property="og:description" content="Ankit Shukla is a Full Stack Developer & AI Agent Builder based in Bihar, India. Expert in React, Next.js, Java Spring Boot, LangChain, RAG, and autonomous AI Agents.">
+  <meta property="og:image" content="frames/ezgif-frame-001.jpg">
+  <meta property="og:url" content="https://ankitshukla.dev/">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ankit Shukla — Full Stack Developer & AI Agent Builder">
+  <meta name="twitter:description" content="Ankit Shukla is a Full Stack Developer & AI Agent Builder based in Bihar, India. Expert in React, Next.js, Java Spring Boot, LangChain, RAG, and autonomous AI Agents.">
+  <meta name="twitter:image" content="frames/ezgif-frame-001.jpg">
   
   <!-- Google Fonts: Cinzel (Luxury Editorial Serif) + Syne & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -446,6 +463,35 @@
 
     .hero-link-item:hover {
       color: #fff;
+    }
+
+    .hero-lets-talk-pill {
+      display: inline-flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      gap: 0.4rem !important;
+      background: rgba(225, 29, 72, 0.2) !important;
+      border: 1px solid rgba(244, 63, 94, 0.45) !important;
+      padding: 0.35rem 0.95rem !important;
+      border-radius: 999px !important;
+      transition: all 0.25s ease !important;
+      align-self: center !important;
+    }
+
+    .hero-lets-talk-pill span {
+      color: #fff !important;
+      font-size: 0.82rem !important;
+      font-weight: 700 !important;
+      text-transform: none !important;
+      letter-spacing: 0.03em !important;
+    }
+
+    .hero-lets-talk-pill:hover {
+      background: var(--accent-rose) !important;
+      border-color: #fff !important;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(244, 63, 94, 0.4);
+      color: #fff !important;
     }
 
     .hero-scroll-hint {
@@ -1164,21 +1210,28 @@
     .timeline-container {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: clamp(1.4rem, 2.5vw, 1.85rem);
       width: 100%;
+      position: relative;
     }
 
     .timeline-card {
       display: grid;
       grid-template-columns: 240px 1fr;
-      gap: clamp(1rem, 2.5vw, 2rem);
+      gap: clamp(1.2rem, 2.5vw, 2.2rem);
       align-items: start;
+      position: relative;
+      box-sizing: border-box;
+      min-width: 0;
+      overflow: visible;
     }
 
     .timeline-meta {
       display: flex;
       flex-direction: column;
       gap: 0.35rem;
+      min-width: 0;
+      word-break: break-word;
     }
 
     .timeline-date {
@@ -1199,6 +1252,11 @@
     .timeline-location {
       font-size: 0.82rem;
       color: var(--text-dim);
+    }
+
+    .timeline-content {
+      min-width: 0;
+      overflow-wrap: break-word;
     }
 
     .timeline-content h4 {
@@ -1251,6 +1309,7 @@
     }
 
     .collab-lead {
+      font-family: var(--font-display);
       font-size: clamp(1.1rem, 2.5vw, 1.4rem);
       font-weight: 700;
       line-height: 1.4;
@@ -1268,6 +1327,32 @@
       flex-direction: column;
       gap: 0.85rem;
       margin-top: 0.5rem;
+    }
+
+    .collab-lets-talk-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      text-decoration: none;
+      color: #fff;
+      background: linear-gradient(135deg, var(--accent-red), var(--accent-rose));
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 0.85rem 1.6rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: clamp(0.92rem, 1.4vw, 1.02rem);
+      letter-spacing: 0.03em;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 18px rgba(225, 29, 72, 0.35);
+      width: fit-content;
+    }
+
+    .collab-lets-talk-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(225, 29, 72, 0.55);
+      border-color: #fff;
+      color: #fff;
     }
 
     .collab-contact-pill {
@@ -1687,7 +1772,7 @@
       }
       .timeline-card {
         grid-template-columns: 1fr;
-        gap: 0.6rem;
+        gap: 0.85rem;
       }
       .contact-layout {
         grid-template-columns: 1fr;
@@ -1768,6 +1853,11 @@
         gap: 1.2rem;
         text-align: center;
       }
+      .device-mockup-frame {
+        animation-duration: 7s;
+        will-change: transform;
+        transform: translateZ(0);
+      }
     }
 
     /* ── Mobile Small & XS (320px – 480px) ── */
@@ -1815,6 +1905,93 @@
         padding: 1.4rem 1rem;
       }
     }
+
+    /* ── Floating Luxury Sound Narration Control ── */
+    .sound-control-fab {
+      position: fixed;
+      bottom: clamp(1.2rem, 3vw, 2rem);
+      right: clamp(1.2rem, 3vw, 2rem);
+      z-index: 999;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      background: rgba(15, 3, 7, 0.82);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1.5px solid rgba(244, 63, 94, 0.45);
+      border-radius: 100px;
+      padding: 0.6rem 1.2rem;
+      color: #ffffff;
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75), 0 0 25px rgba(225, 29, 72, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+      outline: none;
+    }
+
+    .sound-control-fab:hover {
+      transform: translateY(-3px) scale(1.05);
+      border-color: rgba(244, 63, 94, 0.85);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.85), 0 0 35px rgba(244, 63, 94, 0.5);
+    }
+
+    .sound-control-fab:active {
+      transform: scale(0.96);
+    }
+
+    .sound-fab-icon {
+      font-size: 1.05rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s ease;
+    }
+
+    .sound-control-fab:hover .sound-fab-icon {
+      transform: scale(1.18);
+    }
+
+    .sound-fab-waves {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      height: 14px;
+    }
+
+    .sound-wave-bar {
+      width: 2.5px;
+      height: 100%;
+      background: var(--accent-rose);
+      border-radius: 2px;
+      transform-origin: bottom;
+      animation: soundWaveAnim 1.2s ease-in-out infinite alternate;
+    }
+
+    .sound-wave-bar:nth-child(1) { height: 40%; animation-delay: 0.1s; }
+    .sound-wave-bar:nth-child(2) { height: 100%; animation-delay: 0.35s; }
+    .sound-wave-bar:nth-child(3) { height: 65%; animation-delay: 0.6s; }
+
+    @keyframes soundWaveAnim {
+      0% { transform: scaleY(0.25); opacity: 0.5; }
+      100% { transform: scaleY(1.05); opacity: 1; }
+    }
+
+    .sound-control-fab.muted {
+      background: rgba(10, 2, 4, 0.7);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.65);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .sound-control-fab.muted .sound-wave-bar {
+      animation: none;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.3);
+    }
   </style>
 </head>
 <body>
@@ -1861,7 +2038,7 @@
     <!-- ==========================================================
          HERO SECTION (Matching Reference Image 1)
          ========================================================== -->
-    <section class="hero-section">
+    <section class="hero-section" id="hero">
       <div class="hero-top-title">Portfolio</div>
 
       <div class="hero-middle-grid">
@@ -1883,17 +2060,12 @@
 
       <div class="hero-bottom-bar">
         <div class="hero-contact-links">
-          <a href="mailto:ankitshukla9135@gmail.com" class="hero-link-item">
-            <span>email:</span>
-            <span>ankitshukla9135@gmail.com</span>
+          <a href="#contact-form" class="hero-link-item hero-lets-talk-pill">
+            <span>💬 Let's Talk</span>
           </a>
           <a href="https://github.com/Ankit-Shukla0" target="_blank" rel="noopener noreferrer" class="hero-link-item">
             <span>github:</span>
             <span>github.com/Ankit-Shukla0</span>
-          </a>
-          <a href="tel:+918797267351" class="hero-link-item">
-            <span>phone:</span>
-            <span>+91 8797267351</span>
           </a>
         </div>
 
@@ -2460,20 +2632,9 @@
           </p>
 
           <div class="collab-contact-items">
-            <a href="mailto:ankitshukla9135@gmail.com" class="collab-contact-pill">
-              <div class="collab-icon-box">✉</div>
-              <div>
-                <div style="font-size: 0.75rem; color: var(--accent-rose); font-weight: 700; text-transform: uppercase;">Email Me</div>
-                <div>ankitshukla9135@gmail.com</div>
-              </div>
-            </a>
-
-            <a href="tel:+918797267351" class="collab-contact-pill">
-              <div class="collab-icon-box">📞</div>
-              <div>
-                <div style="font-size: 0.75rem; color: var(--accent-rose); font-weight: 700; text-transform: uppercase;">Direct Line</div>
-                <div>+91 8797267351</div>
-              </div>
+            <a href="#contact-form" class="collab-lets-talk-btn">
+              <span>Let's Talk</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
 
             <div class="collab-contact-pill">
@@ -2552,7 +2713,7 @@
             </div>
             <div class="qr-label">Connect</div>
             <div class="qr-sub">Scan to start conversation</div>
-            <a href="mailto:ankitshukla9135@gmail.com" style="color: var(--accent-rose); font-size: 0.8rem; font-weight: bold; text-decoration: none; margin-top: 0.3rem;">ankitshukla9135 →</a>
+            <a href="#contact-form" style="color: var(--accent-rose); font-size: 0.8rem; font-weight: bold; text-decoration: none; margin-top: 0.3rem;">Let's Talk →</a>
           </div>
         </div>
       </div>
@@ -2663,6 +2824,17 @@
       <div>© 2026 • Crafted with Smooth Scroll & 300-Frame Animation</div>
     </footer>
 
+    <!-- Floating Luxury Sound Narration Toggle -->
+    <button class="sound-control-fab" id="soundControlBtn" aria-label="Toggle Sound Narration" title="Toggle Voice-Over Narration">
+      <span class="sound-fab-icon" id="soundFabIcon">🔊</span>
+      <span class="sound-fab-label" id="soundFabLabel">Sound ON</span>
+      <div class="sound-fab-waves">
+        <span class="sound-wave-bar"></span>
+        <span class="sound-wave-bar"></span>
+        <span class="sound-wave-bar"></span>
+      </div>
+    </button>
+
   </div>
 
   <!-- Smooth Scroll Frame Interpolation Engine -->
@@ -2683,9 +2855,11 @@
       const padZero = (n) => n.toString().padStart(3, '0');
       const getFramePath = (index) => `frames/ezgif-frame-${padZero(index + 1)}.jpg`;
 
-      // Set canvas size for high-DPI displays
+      // Set canvas size with mobile DPR optimization to prevent fill-rate bottleneck
       function resizeCanvas() {
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const isMobile = window.innerWidth <= 768;
+        // Cap DPR at 1.5 on mobile to cut GPU overhead by ~40% while maintaining sharpness
+        const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2);
         canvas.width = window.innerWidth * dpr;
         canvas.height = window.innerHeight * dpr;
         canvas.style.width = window.innerWidth + 'px';
@@ -2693,9 +2867,10 @@
         
         ctx.scale(dpr, dpr);
         ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = 'high';
+        ctx.imageSmoothingQuality = isMobile ? 'medium' : 'high';
 
         drawCurrentFrame(Math.round(currentFrame), true);
+        requestRender();
       }
 
       // Draw frame with object-fit: cover logic and head/face preservation
@@ -2764,48 +2939,128 @@
         return null;
       }
 
-      // Preload images into memory
-      function preloadImages() {
-        for (let i = 0; i < TOTAL_FRAMES; i++) {
-          const img = new Image();
-          img.src = getFramePath(i);
-          img.onload = () => {
-            images[i] = img;
-            if (!isInitialDrawn && (i === 0 || images[0])) {
-              drawCurrentFrame(0, true);
-              isInitialDrawn = true;
-            }
-          };
-          img.onerror = () => {
-            if (img.src.includes('frames/')) {
-              img.src = `ezgif-frame-${padZero(i + 1)}.jpg`;
-            }
-          };
-        }
+      // Load a single frame asynchronously
+      function loadSingleFrame(index) {
+        if (index < 0 || index >= TOTAL_FRAMES || images[index]) return;
+        const img = new Image();
+        img.decoding = 'async';
+        img.src = getFramePath(index);
+        img.onload = () => {
+          images[index] = img;
+          if (!isInitialDrawn && (index === 0 || images[0])) {
+            drawCurrentFrame(0, true);
+            isInitialDrawn = true;
+          }
+        };
+        img.onerror = () => {
+          if (img.src.includes('frames/')) {
+            img.src = `ezgif-frame-${padZero(index + 1)}.jpg`;
+          }
+        };
       }
 
-      // Calculate target frame from scroll progress
+      // High-performance progressive preloading:
+      // 1. Immediately loads frame 0 so initial paint occurs without delay.
+      // 2. Batches subsequent frames during idle time to prevent network bottlenecking on mobile.
+      function preloadImages() {
+        // Immediate load first frame
+        loadSingleFrame(0);
+
+        const isMobile = window.innerWidth <= 768;
+        const step = isMobile ? 3 : 2;
+
+        const scheduleBatch = (startIndex, stepSize, maxIndex) => {
+          let current = startIndex;
+          function process() {
+            const batchLimit = isMobile ? 4 : 8;
+            let count = 0;
+            while (current < maxIndex && count < batchLimit) {
+              loadSingleFrame(current);
+              current += stepSize;
+              count++;
+            }
+            if (current < maxIndex) {
+              if (window.requestIdleCallback) {
+                requestIdleCallback(process, { timeout: 250 });
+              } else {
+                setTimeout(process, 30);
+              }
+            } else if (stepSize > 1) {
+              // Fill remaining intermediate frames
+              scheduleBatch(1, 1, TOTAL_FRAMES);
+            }
+          }
+
+          if (window.requestIdleCallback) {
+            requestIdleCallback(process, { timeout: 350 });
+          } else {
+            setTimeout(process, 40);
+          }
+        };
+
+        scheduleBatch(1, step, TOTAL_FRAMES);
+      }
+
+      // Calculate target frame from scroll progress & dynamically prioritize adjacent frames
       function onScroll() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
         const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
         const progress = maxScroll > 0 ? Math.min(Math.max(scrollTop / maxScroll, 0), 1) : 0;
         targetFrame = progress * (TOTAL_FRAMES - 1);
+
+        // Dynamically prioritize loading frames around current scroll position
+        const targetInt = Math.round(targetFrame);
+        const radius = window.innerWidth <= 768 ? 4 : 8;
+        for (let i = Math.max(0, targetInt - radius); i <= Math.min(TOTAL_FRAMES - 1, targetInt + radius); i++) {
+          if (!images[i]) loadSingleFrame(i);
+        }
+
+        requestRender();
       }
 
-      // Silky LERP render loop
+      // Idle-pause render loop to conserve mobile CPU and battery
+      let isRendering = false;
+      function requestRender() {
+        if (!isRendering) {
+          isRendering = true;
+          requestAnimationFrame(renderLoop);
+        }
+      }
+
       function renderLoop() {
         const diff = targetFrame - currentFrame;
 
-        if (Math.abs(diff) > 0.001) {
+        if (Math.abs(diff) > 0.005) {
           currentFrame += diff * LERP_FACTOR;
           drawCurrentFrame(Math.round(currentFrame));
-        } else if (currentFrame !== targetFrame) {
+          requestAnimationFrame(renderLoop);
+        } else {
           currentFrame = targetFrame;
           drawCurrentFrame(Math.round(currentFrame));
+          isRendering = false; // Idle pause
         }
-
-        requestAnimationFrame(renderLoop);
       }
+
+      // Universal Three.js / 3D Canvas / Heavy Animation Lazy-Loader Observer
+      function initLazyThreeScenes() {
+        const scenes = document.querySelectorAll('[data-lazy-three], .threejs-scene, .three-container');
+        if (!scenes.length) return;
+
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+              if (el.dataset.initFn && typeof window[el.dataset.initFn] === 'function') {
+                window[el.dataset.initFn](el);
+              }
+              obs.unobserve(el);
+            }
+          });
+        }, { rootMargin: '200px 0px' });
+
+        scenes.forEach(el => observer.observe(el));
+      }
+      initLazyThreeScenes();
 
       // Event listeners
       window.addEventListener('scroll', onScroll, { passive: true });
@@ -2869,7 +3124,7 @@
       resizeCanvas();
       preloadImages();
       onScroll();
-      requestAnimationFrame(renderLoop);
+      requestRender();
     })();
   </script>
 
@@ -2945,98 +3200,305 @@
       }
     }
 
-    // ── Interactive Web Audio Sound Engine (Syncs with scroll animation & UI) ──
-    (function () {
-      let audioCtx = null;
-      let lastScrollPos = window.scrollY;
-      let lastSoundTime = 0;
+    // ==========================================================
+    // CENTRALIZED SCROLL-BASED VOICE-OVER & AUDIO NARRATION MANAGER
+    // ==========================================================
+    const VoiceOverManager = (function () {
+      // Configuration for section-specific voice-over narrations
+      const SECTION_VOICE_CONFIG = {
+        hero: {
+          title: 'Hero Overview',
+          src: 'Man_walking_and_sitting_on_202608282128.mp3'
+        },
+        about: {
+          title: 'About Me',
+          src: 'Man_walking_and_sitting_on_202608282128.mp3'
+        },
+        workflow: {
+          title: 'Skills & Architecture',
+          src: 'Man_walking_and_sitting_on_202608282128.mp3'
+        },
+        projects: {
+          title: 'Featured Projects',
+          src: 'Man_walking_and_sitting_on_202608282128.mp3'
+        },
+        showcase: {
+          title: 'Interactive Showcase',
+          src: 'Man_walking_and_sitting_on_202608282128.mp3'
+        },
+        experience: {
+          title: 'Experience & Timeline',
+          src: 'Man_walking_and_sitting_on_202608282128.mp3'
+        },
+        contact: {
+          title: 'Collaboration & Contact',
+          src: 'Man_walking_and_sitting_on_202608282128.mp3'
+        }
+      };
 
-      function getAudioContext() {
-        if (!audioCtx) {
-          const AudioContext = window.AudioContext || window.webkitAudioContext;
-          if (AudioContext) {
-            audioCtx = new AudioContext();
+      // Persistent session state
+      const playedSections = new Set();
+      let activeSectionId = null;
+      let currentAudio = null;
+      let isAudioAllowed = false; // Unlocked strictly after first user interaction
+      let isMuted = localStorage.getItem('portfolio_sound_muted') === 'true';
+      let settleTimeout = null;
+      let transitionCounter = 0;
+      const sectionRatios = {};
+
+      // DOM UI Elements
+      const soundBtn = document.getElementById('soundControlBtn');
+      const soundIcon = document.getElementById('soundFabIcon');
+      const soundLabel = document.getElementById('soundFabLabel');
+
+      function updateSoundUI() {
+        if (!soundBtn) return;
+        if (isMuted) {
+          soundBtn.classList.add('muted');
+          if (soundIcon) soundIcon.textContent = '🔇';
+          if (soundLabel) soundLabel.textContent = 'Sound OFF';
+          soundBtn.setAttribute('aria-label', 'Sound Muted. Click to Enable Narration');
+        } else {
+          soundBtn.classList.remove('muted');
+          if (soundIcon) soundIcon.textContent = '🔊';
+          if (soundLabel) soundLabel.textContent = 'Sound ON';
+          soundBtn.setAttribute('aria-label', 'Sound Enabled. Click to Mute');
+        }
+      }
+
+      // Smooth Fade Out (200ms - 400ms transition)
+      function fadeOut(audio, duration = 300) {
+        return new Promise((resolve) => {
+          if (!audio || audio.paused) {
+            if (audio) {
+              audio.pause();
+              audio.currentTime = 0;
+            }
+            resolve();
+            return;
+          }
+
+          const startVol = audio.volume;
+          const startTime = performance.now();
+
+          function step(now) {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            audio.volume = Math.max(0, startVol * (1 - progress));
+
+            if (progress < 1 && !audio.paused) {
+              requestAnimationFrame(step);
+            } else {
+              audio.pause();
+              audio.currentTime = 0;
+              audio.volume = 0;
+              resolve();
+            }
+          }
+          requestAnimationFrame(step);
+        });
+      }
+
+      // Smooth Fade In (200ms - 400ms transition)
+      function fadeIn(audio, duration = 320, targetVol = 0.85) {
+        return new Promise((resolve) => {
+          if (!audio) { resolve(); return; }
+          audio.volume = 0;
+          const playPromise = audio.play();
+
+          if (playPromise !== undefined) {
+            playPromise.then(() => {
+              const startTime = performance.now();
+
+              function step(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                audio.volume = Math.min(targetVol, progress * targetVol);
+
+                if (progress < 1 && !audio.paused) {
+                  requestAnimationFrame(step);
+                } else {
+                  audio.volume = targetVol;
+                  resolve();
+                }
+              }
+              requestAnimationFrame(step);
+            }).catch(() => {
+              // Autoplay policy prevented or playback aborted
+              resolve();
+            });
+          } else {
+            resolve();
+          }
+        });
+      }
+
+      // Play Voice Narration for a given section
+      async function playSectionVoice(sectionId) {
+        if (!isAudioAllowed || isMuted) return;
+        if (!sectionId || playedSections.has(sectionId)) return;
+
+        const config = SECTION_VOICE_CONFIG[sectionId];
+        const sectionEl = document.getElementById(sectionId);
+        const customSrc = sectionEl ? sectionEl.getAttribute('data-voice-src') : null;
+        const audioSrc = customSrc || (config ? config.src : null);
+
+        if (!audioSrc) return;
+
+        // Mark as played so each section voice plays only once during the current visit
+        playedSections.add(sectionId);
+
+        const transitionId = ++transitionCounter;
+
+        // Smoothly fade out existing audio
+        if (currentAudio) {
+          const prev = currentAudio;
+          currentAudio = null;
+          await fadeOut(prev, 280);
+        }
+
+        // If another transition was initiated in the meantime, abort
+        if (transitionId !== transitionCounter || isMuted || !isAudioAllowed) return;
+
+        // Instantiate new audio element
+        const newAudio = new Audio(audioSrc);
+        newAudio.preload = 'auto';
+        currentAudio = newAudio;
+
+        // Clean up on natural end
+        newAudio.addEventListener('ended', () => {
+          if (currentAudio === newAudio) {
+            currentAudio = null;
+          }
+        });
+
+        await fadeIn(newAudio, 320, 0.85);
+      }
+
+      // Evaluate which section is most visible and settled in the viewport
+      function evaluateActiveSection() {
+        let bestSection = null;
+        let maxRatio = 0.28; // Meaningful threshold required
+
+        for (const [id, ratio] of Object.entries(sectionRatios)) {
+          if (ratio > maxRatio) {
+            maxRatio = ratio;
+            bestSection = id;
           }
         }
-        if (audioCtx && audioCtx.state === 'suspended') {
-          audioCtx.resume();
+
+        // Top of the page defaults to hero
+        if (window.scrollY < 120) {
+          bestSection = 'hero';
         }
-        return audioCtx;
+
+        if (bestSection && bestSection !== activeSectionId) {
+          activeSectionId = bestSection;
+
+          // Fast-scroll protection: debounce by 300ms so rapid scrolling does not trigger intermediate tracks
+          if (settleTimeout) clearTimeout(settleTimeout);
+          settleTimeout = setTimeout(() => {
+            if (activeSectionId === bestSection && isAudioAllowed && !isMuted) {
+              playSectionVoice(bestSection);
+            }
+          }, 300);
+        }
       }
 
-      // Play soft, warm organic acoustic resonance when scrubbing video frames
-      function playScrubSound(intensity = 1.0) {
-        const ctx = getAudioContext();
-        if (!ctx) return;
-
-        const now = ctx.currentTime;
-        if (now - lastSoundTime < 0.08) return;
-        lastSoundTime = now;
-
-        try {
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-          const filter = ctx.createBiquadFilter();
-
-          filter.type = 'lowpass';
-          filter.frequency.setValueAtTime(1400, now);
-
-          const maxScroll = document.documentElement.scrollHeight - window.innerHeight || 1;
-          const progress = Math.min(Math.max(window.scrollY / maxScroll, 0), 1);
-          const baseFreq = 200 + progress * 220; // 200Hz to 420Hz harmonic range
-
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(baseFreq, now);
-          osc.frequency.exponentialRampToValueAtTime(baseFreq * 0.7, now + 0.14);
-
-          gain.gain.setValueAtTime(0.001, now);
-          gain.gain.linearRampToValueAtTime(0.045 * Math.min(intensity, 1.5), now + 0.02);
-          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.15);
-
-          osc.connect(filter);
-          filter.connect(gain);
-          gain.connect(ctx.destination);
-
-          osc.start(now);
-          osc.stop(now + 0.16);
-        } catch (e) {}
+      // User Interaction Unlock Handler
+      function unlockAudio() {
+        if (!isAudioAllowed) {
+          isAudioAllowed = true;
+          // Trigger voice for currently visible settled section if not played
+          evaluateActiveSection();
+        }
+        // Remove one-time unlock listeners
+        ['scroll', 'click', 'keydown', 'touchstart', 'pointerdown'].forEach(evt => {
+          window.removeEventListener(evt, unlockAudio, { capture: true });
+        });
       }
 
-      // Track scroll scrubbing across desktop and mobile
-      window.addEventListener('scroll', () => {
-        const currentScroll = window.scrollY;
-        const speed = Math.abs(currentScroll - lastScrollPos);
-        lastScrollPos = currentScroll;
+      // Initialize Section Observer
+      function initObserver() {
+        const sectionsToWatch = ['hero', 'about', 'workflow', 'projects', 'showcase', 'experience', 'contact'];
 
-        if (speed > 2) {
-          playScrubSound(Math.min(speed / 20, 1.2));
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            let id = entry.target.id;
+            if (!id && entry.target.classList.contains('hero-section')) {
+              id = 'hero';
+            }
+            if (id) {
+              sectionRatios[id] = entry.isIntersecting ? entry.intersectionRatio : 0;
+            }
+          });
+          evaluateActiveSection();
+        }, {
+          threshold: [0.15, 0.35, 0.55, 0.75, 0.95],
+          rootMargin: '-5% 0px -10% 0px'
+        });
+
+        sectionsToWatch.forEach(id => {
+          const el = document.getElementById(id) || (id === 'hero' ? document.querySelector('.hero-section') : null);
+          if (el) observer.observe(el);
+        });
+      }
+
+      // Sound Toggle Button Handler & Interaction Listeners
+      function initControls() {
+        updateSoundUI();
+
+        if (soundBtn) {
+          soundBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            isMuted = !isMuted;
+            localStorage.setItem('portfolio_sound_muted', isMuted);
+            updateSoundUI();
+
+            if (isMuted) {
+              if (currentAudio) {
+                fadeOut(currentAudio, 250);
+              }
+            } else {
+              unlockAudio();
+              if (activeSectionId && !playedSections.has(activeSectionId)) {
+                playSectionVoice(activeSectionId);
+              }
+            }
+          });
         }
-      }, { passive: true });
 
-      // Interactive UI click sound on buttons and links
-      document.addEventListener('click', (e) => {
-        if (e.target.closest('a, button, .tool-avatar-bubble, .device-action-btn, .collab-contact-pill')) {
-          const ctx = getAudioContext();
-          if (!ctx) return;
-          const now = ctx.currentTime;
-          try {
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.type = 'triangle';
-            osc.frequency.setValueAtTime(520, now);
-            osc.frequency.exponentialRampToValueAtTime(880, now + 0.08);
+        // Register one-time interaction listeners for unlocking audio
+        ['scroll', 'click', 'keydown', 'touchstart', 'pointerdown'].forEach(evt => {
+          window.addEventListener(evt, unlockAudio, { capture: true, passive: true });
+        });
+      }
 
-            gain.gain.setValueAtTime(0.035, now);
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.09);
+      function init() {
+        initControls();
+        initObserver();
+      }
 
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.start(now);
-            osc.stop(now + 0.1);
-          } catch (e) {}
+      return {
+        init,
+        playSectionVoice,
+        get activeSection() { return activeSectionId; },
+        get isMuted() { return isMuted; },
+        setMuted: (muted) => {
+          isMuted = !!muted;
+          localStorage.setItem('portfolio_sound_muted', isMuted);
+          updateSoundUI();
+          if (isMuted && currentAudio) fadeOut(currentAudio, 200);
         }
-      });
+      };
     })();
+
+    // Initialize Voice-Over Manager on DOM Ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => VoiceOverManager.init());
+    } else {
+      VoiceOverManager.init();
+    }
   </script>
 
 </body>
