@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ankitshukla-tan.vercel.app/sitemap.xml
